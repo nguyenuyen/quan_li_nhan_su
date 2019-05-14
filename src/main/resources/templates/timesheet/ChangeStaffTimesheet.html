@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="ChangeTimesheetOfEmployees">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Yêu cầu chỉnh timesheet của nhân viên</h2>
+            <small class="card-subtitle"></small>
+        </div>
+        <div class="card-block">
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Từ ngày </label>
+
+                        <div class="form-group ">
+                            <input type="text" class="form-control start_date" id="sdChangeTimesheetE" name="sdChangeTimesheetE" placeholder="mm/dd/yyyy">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Tới ngày </label>
+
+                        <div class="form-group ">
+                            <input type="text" class="form-control end_date" id="edChangeTimesheetE" name="edChangeTimesheetE" placeholder="mm/dd/yyyy">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-4 text-center">
+                        <button type="submit" class="btn btn-secondary btn--icon-text mb-1 waves-effect">
+                            <i class="zmdi zmdi-search "></i> Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-block">
+            <span>Total number of record: 0</span>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">#</th>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Giờ vào</th>
+                        <th scope="col">Yêu ra</th>
+                        <th scope="col">Loại Yêu cầu </th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+h4 {
+    color: white;
+    margin-top: 10px;
+}
+
+.nav-scroll {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.openbtn, .closebtn {
+    font-size: 1.5rem;
+    color: white;
+    margin-right: 10px;
+    display: none;
+}
+
+@media (max-width: 1199px) {
+    .openbtn {
+        display: block;
+    }
+
+    .sidebar {
+        background-color: #f3f3f3;
+        transition: transform .3s, opacity .3s
+    }
+
+    .sidebar:not(.sidebar--toggled){
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0)
+    }
+
+    .sidebar.sidebar--toggled {
+        box-shadow: 5px 0 10px rgba(0, 0, 0, .08);
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+}
+
+@media (min-width: 1200px) {
+    .closebtn{
+        display: none!important;
+    }
+}

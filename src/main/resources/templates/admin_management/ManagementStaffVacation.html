@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="vaction">
+    <div class="card" style="margin-bottom: 0!important;">
+        <div class="card-header">
+            <h2 class="card-title">Ngày lễ tết</h2>
+            <small class="card-subtitle"></small>
+        </div>
+        <div class="card-block">
+            <form action="" method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>ngày</label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control date" name="date" placeholder="yyyy-mm-dd">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>sự kiện </label>
+                        <div class="form-group input-group ">
+                            <input type="text" class="form-control  " id="search_employee_holiday" name="search_employee_holiday" placeholder="sự kiện..">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mt-4 text-center">
+                        <button type="submit" class="btn btn-primary btn--icon-text mb-1 waves-effect" id="submitrequest"><i class="zmdi zmdi-mail-send zmdi-hc-fw"></i>Gửi yêu cầu</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-block">
+            <span>Total number of records: 0</span>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">#</th>
+                        <th scope="col">Phòng ban</th>
+                        <th scope="col">họ và tên</th>
+                        <th scope="col">ngày</th>
+                        <th scope="col">sự kiện</th>
+                        <th scope="col">chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

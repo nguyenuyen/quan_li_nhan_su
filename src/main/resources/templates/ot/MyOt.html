@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="requiteOt">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title" align="center">Yêu cầu làm thêm giờ</h2>
+        </div>
+        <div class="card-block">
+
+            <form method="get" action="" id="form-request" style="clear: both;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Bắt đầu <span class="text-danger">*</span></label>
+
+                        <div class="form-group ">
+                            <input type="text" class="form-control start_date" id="start_date" name="startdate"
+                                   placeholder="YYYY-MM-DD">
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label>Kết thúc <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control end_date" id="end_date" name="enddate"
+                                   placeholder="YYYY-MM-DD">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Thời lượng</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Ngày công</span>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" data-url="/dayoff/count-duration"
+                                           id="working_day" name="working_day" >
+                                    <div class="text-danger duration_date"></div>
+                                </div>
+
+                            </div>
+                            <small class="card-subtitle">
+                                1 ngày công tương đương 8h làm việc.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Người phê duyệt <span class="text-danger">*</span></label>
+                        <div class="form-group">
+                            <select name="approver" id="approver" class="select2 form-control">
+                                <option value="">----------</option>
+                                <!--/*@thymesVar id="listApprover" type="Map"*/-->
+                                <option th:each="list : ${listApprover}" th:value="${list['key']}"
+                                        th:utext="${list['value']}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Lý do làm thêm giờ <span class="text-danger">*</span></label>
+                        <div class="form-group">
+              <textarea type="text" class="form-control textarea-autosize"
+                        rows="4"
+                        id="reason" name="reason"
+                        placeholder="Lý do nghỉ sẽ được đính kèm trong email gửi tới người phê duyệt"></textarea>
+                            <i class="form-group__bar char-count"></i>
+                            <p class="text-danger reason"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mt-4 text-right">
+                        <button type="submit" class="btn btn-primary btn--icon-text mb-1 waves-effect"
+                                id="submitrequest" onclick="requestVacation('overtime');"><i class="zmdi zmdi-mail-send zmdi-hc-fw"></i>Gửi yêu cầu
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+            <!-- end form -->
+        </div>
+    </div><!--.card-->
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title text-center" id="request-list">Yêu cầu làm thêm giờ của tôi</h2>
+        </div>
+        <div class="card-block">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">ID</th>
+                        <th scope="col">Ngày bắt đầu</th>
+                        <th scope="col">Ngày kết thúc</th>
+                        <th scope="col">Thời lượng (Giờ)</th>
+                        <th scope="col">Lý do</th>
+                        <th scope="col">ngày yêu cầu</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Người phê duyệt</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                    </thead>
+
+                    <!--/*@thymesVar id="listRequite" type="java.util.List"*/-->
+                    <tbody th:each="list : ${listRequite}">
+                    <tr>
+                        <td th:utext="${list['id']}"></td>
+                        <td th:utext="${list['startDay']}"></td>
+                        <td th:utext="${list['endDay']}"></td>
+                        <td th:utext="${list['numberDate']}"></td>
+                        <td th:utext="${list['reason']}"></td>
+                        <td th:utext="${list['dayRequest']}"></td>
+                        <td>
+                            <span th:if="${list['feedBack']} == null">cho phe duyet</span>
+                            <span th:if="${list['feedBack']} == 1">chấp thuận</span>
+                            <span th:if="${list['feedBack']} == 0">đã hủy</span>
+                        </td>
+
+                        <td th:utext="${list['mailApprover']}"></td>
+                        <td>
+                            <span th:if="${list['feedBack']} == null"> <a th:href="@{/overtime(id=${list['id']})}">cancel</a></span>
+                            <span th:if="${list['feedBack']} != null"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--.card-->
+</div>
+</body>
+</html>

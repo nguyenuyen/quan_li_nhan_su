@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="timesheetOfEmployess">
+    <div class="card" style="margin-bottom: 0!important;">
+        <div class="card-header">
+            <h2 class="card-title">Timesheet của nhân viên</h2>
+            <small class="card-subtitle"></small>
+        </div>
+        <div class="card-block">
+            <form action="" method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Chọn nhân viên</label>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control " id="name" name="name" placeholder="Nguyễn Văn A">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Từ ngày </label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control start_date" id="start_date_timesheet" name="start_date_timesheet" placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tới ngày  </label>
+
+                        <div class="form-group ">
+                            <input type="text" class="form-control end_date" id="end_date_timesheet" name="end_date_timesheet" placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-4 text-center">
+                        <button type="submit" class="btn btn-secondary btn--icon-text mb-1 waves-effect">
+                            <i class="zmdi zmdi-filter-list "></i> lọc
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group space_layout">
+                            <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
+                            <input type="text" class="form-control " id="search" name="search" placeholder="Search for record...">
+                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
+                                <i class="zmdi zmdi-print"></i>
+                            </button>
+                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
+                                <i class="zmdi zmdi-download"></i>
+                            </button>
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger "></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-block">
+            <span>Total number of records: 0</span>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">#</th>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Giờ yêu cầu</th>
+                        <th scope="col">Yêu cầu</th>
+                        <th scope="col">Loại yêu cầu</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

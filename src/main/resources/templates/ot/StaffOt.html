@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="requiteOtStaff">
+
+    <form method="get" action="/overtimeStaff" id="form-request" style="clear: both;">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" id="request-list">Yêu cầu làm thêm của nhân viên</h2>
+                <div style="padding-top: 10px;">Yêu cầu làm thêm cần được bạn phê duyệt</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group space_layout">
+                            <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
+                            <!--/*@thymesVar id="search" type="java"*/-->
+                            <input type="text" class="form-control " id="search" name="search" placeholder="Search for record..." onkeypress="search()" th:value="${search}">
+                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
+                                <i class="zmdi zmdi-print"></i>
+                            </button>
+                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
+                                <i class="zmdi zmdi-download"></i>
+                            </button>
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger "></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr class="text-uppercase">
+                            <th scope="col">id</th>
+                            <th scope="col">Ngày bắt đầu</th>
+                            <th scope="col">Ngày kết thúc</th>
+                            <th scope="col">Thời lượng</th>
+                            <th scope="col">lí do</th>
+                            <th scope="col">Yêu cầu lúc</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Người phê duyệt</th>
+                            <th scope="col">hủy</th>
+                            <th scope="col">chấp thuận</th>
+                        </tr>
+                        </thead>
+                        <!--/*@thymesVar id="listRequite" type="java.util.List"*/-->
+                        <tbody th:each="list : ${listRequite}">
+                        <tr>
+                            <td th:utext="${list['id']}"></td>
+                            <td th:utext="${list['startDay']}"></td>
+                            <td th:utext="${list['endDay']}"></td>
+                            <td th:utext="${list['numberDate']}"></td>
+                            <td th:utext="${list['reason']}"></td>
+                            <td th:utext="${list['dayRequest']}"></td>
+                            <td>
+                                <span th:if="${list['feedBack']} == null">cho phe duyet</span>
+                                <span th:if="${list['feedBack']} == 1">chấp thuận</span>
+                                <span th:if="${list['feedBack']} == 0">đã hủy</span>
+                            </td>
+
+                            <td th:utext="${list['mailApprover']}"></td>
+
+                            <td>
+                            <span th:if="${list['feedBack']} == null">
+                                <a th:href="@{/overtimeStaff(id=${list['id']}, requite = 0)}">cancel</a></span>
+                                <span th:if="${list['feedBack']} != null"></span>
+                            </td>
+
+                            <td>
+                            <span th:if="${list['feedBack']} == null">
+                                <a th:href="@{/overtimeStaff(id=${list['id']}, requite = 1)}">approve</a></span>
+                                <span th:if="${list['feedBack']} != null"></span>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--.card-->
+    </form>
+
+</div>
+</body>
+</html>

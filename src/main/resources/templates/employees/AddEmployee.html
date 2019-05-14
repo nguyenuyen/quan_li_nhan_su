@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="AddEmployee">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title" align="center">Thêm nhân viên</h2>
+            <small class="card-subtitle"></small>
+        </div>
+        <div class="card-block">
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Họ <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Nguyễn">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Đệm <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Thị">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Tên <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Uyên">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Mail <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="mail" name="mail" placeholder="uyen@vnext.com.vn">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Mã vân tay <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="code_fingerprint" name="code_fingerprint" placeholder="360">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Mã nhân viên <span class="text-danger">*</span></label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control" id="code" name="code" placeholder="VN00011">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Loại hợp đồng</label>
+                        <div class="form-group">
+                            <select name="contract" id="contract" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
+                                <option selected></option>
+
+                                <option value="thuc_tap">Thực tập sinh</option>
+
+                                <option value="cong_tac_vien">Cộng tác viên</option>
+
+                                <option value="huebt@vnext.vn">Thử việc </option>
+
+                                <option value="thinhhm@vnext.vn">Chính thức</option>
+
+                            </select>
+                            <p class="text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Phòng ban</label>
+                        <div class="form-group">
+                            <select name="division" id="division" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
+                                <option selected></option>
+
+                                <option value="d1">D1</option>
+
+                                <option value="d2">D2</option>
+
+                                <option value="d3">D3 </option>
+
+                                <option value="bo">BO</option>
+
+                            </select>
+                            <p class="text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Giới tính</label>
+                        <div class="form-group ">
+                            <select name="gender" id="gender" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
+                                <option selected></option>
+
+                                <option value="nam">Nam</option>
+
+                                <option value="nu">Nữ</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>ngày sinh</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control date" id="birth_day" name="birth_day" placeholder="mm/dd/yyyy">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Ngày gia nhập</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control date" id="start_working" name="start_working" placeholder="mm/dd/yyyy">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Ngày chính thức</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control date" id="start_working_main" name="start_working_main" placeholder="mm/dd/yyyy">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Ngày nghỉ việc</label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control date" id="start_working_end" name="start_working_end" placeholder="mm/dd/yyyy">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12" style=" margin-top: 50px;">
+                        <button type="button" class="btn btn-primary" style="margin-left: 45%;">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

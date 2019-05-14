@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<aside class="sidebar" th:fragment="menu">
+    <div class="nav-scroll">
+        <div class="user">
+            <div class="user__info" data-toggle="dropdown">
+                <img class="user__img" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50" alt="">
+                <div>
+                    <div class="user__name">uyennt</div>
+                    <div class="user__email">uyennt@vnext.com.vn</div>
+                </div>
+            </div>
+
+
+            <div class="dropdown-menu">
+                <!-- <a class="dropdown-item" href="/profile">Xem Hồ Sơ</a>
+                <a class="dropdown-item" href="">Settings</a> -->
+                <a class="dropdown-item" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+
+        <ul class="navigation">
+
+            <li class="navigation__active">
+                <a href="/home&group=1&mode=1">
+                    <i class="zmdi zmdi-home"></i> Bảng điều khiển</a>
+            </li>
+
+            <!--<li class="navigation__sub ">-->
+            <!--<a href="">-->
+            <!--<i class="zmdi zmdi-accounts-list-alt zmdi-hc-fw"></i> Tuyển dụng</a>-->
+
+            <!--<ul>-->
+            <!--<li>-->
+            <!--<a href="/employee">Danh sách tuyển dụng</a>-->
+            <!--</li>-->
+
+
+            <!--</ul>-->
+            <!--</li>-->
+
+            <li class="navigation__sub">
+                <a >
+                    <i class="zmdi zmdi-calendar-close zmdi-hc-fw"></i> Nghỉ phép
+                </a>
+
+                <ul >
+                    <li>
+                        <a href="/vacation">Yêu cầu nghỉ phép của tôi</a>
+                    </li>
+                    <li>
+                        <a href="/vacationStaff">Yêu cầu nghỉ phép của nhân viên</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="navigation__sub ">
+                <a href="">
+                    <i class="zmdi zmdi-time-interval zmdi-hc-fw"></i> Làm thêm giờ</a>
+
+                <ul >
+                    <li>
+                        <a href="/overtime">Yêu cầu làm thêm giờ của tôi</a>
+                    </li>
+                    <li>
+                        <a href="/overtimeStaff">Yêu cầu làm thêm giờ của nhân viên</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="navigation__sub ">
+                <a href="">
+                    <i class="zmdi zmdi-time zmdi-hc-fw"></i> Timesheet</a>
+
+                <ul>
+                    <li>
+                        <a href="/timesheet">Timesheet của tôi</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request">Yêu cầu chỉnh timesheet của tôi</a>
+                    </li>
+
+                    <li>
+                        <a href="/dayoff">Timesheet của nhân viên</a>
+                    </li>
+
+                    <li>
+                        <a href="/dayoff">Yêu cầu chỉnh timesheet của nhân viên</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="navigation__sub ">
+                <a href="">
+                    <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> Nhân viên</a>
+
+                <ul>
+                    <li>
+                        <a href="/employee">Danh sách nhân viên</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request">Thêm mới nhân viên</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="navigation__sub ">
+                <a href="">
+                    <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i> Quản lí chấm công</a>
+
+                <ul>
+                    <li>
+                        <a href="/employee">Nhập timesheet từ excel</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request">Timesheet của nhân viên</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request">Ngày lễ tết</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request">Lịch sử +/- ngày phép</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request">Thống kê ngày phép</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request"> Yêu cầu nghỉ phép của nhân viên</a>
+                    </li>
+
+                    <li>
+                        <a href="/timesheet/my/request"> Yêu cầu ot của nhân viên</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+</aside>
+</body>
+</html>

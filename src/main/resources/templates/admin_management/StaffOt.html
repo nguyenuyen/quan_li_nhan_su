@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+</bod>
+<div class="content__inner" th:fragment="requiteOtOfAllEmployees">
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Timesheet của nhân viên</h2>
+        </div>
+
+        <div class="card-block">
+            <form action="" method="get">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label>Chọn phòng ban </label>
+                        <div class="form-group">
+                            <select name="to_uid" id="uid" class="select2 form-control" data-placeholder="D1">
+
+                                <option value="all">Tất cả</option>
+
+                                <option value="d1">D1</option>
+
+                                <option value="d2">D2</option>
+
+                                <option value="d3">D3</option>
+
+                                <option value="bo">BO</option>
+
+
+                            </select>
+                            <p class="text-danger uid"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Từ ngày </label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control start_date" id="startDateOt" name="startDateOt"
+                                   placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Tới ngày </label>
+                        <div class="form-group ">
+                            <input type="text" class="form-control end_date" id="endDateOt" name="endDateOt"
+                                   placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 mt-4 text-center">
+                        <button type="submit" class="btn btn-secondary btn--icon-text mb-1 waves-effect">
+                            <i class="zmdi zmdi-filter-list "></i> lọc
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title" id="request-list">Yêu cầu làm thêm của nhân viên</h2>
+            <div style="padding-top: 10px;">Yêu cầu làm thêm cần được bạn phê duyệt</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group space_layout">
+                        <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
+                        <input type="text" class="form-control " id="search" name="search"
+                               placeholder="Search for record...">
+                        <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
+                            <i class="zmdi zmdi-print"></i>
+                        </button>
+                        <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
+                            <i class="zmdi zmdi-download"></i>
+                        </button>
+                        <i class="form-group__bar"></i>
+                        <p class="text-danger "></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-block">
+
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">Ngày bắt đầu</th>
+                        <th scope="col">Ngày kết thúc</th>
+                        <th scope="col">Thời lượng</th>
+                        <th scope="col">Yêu cầu lúc</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Người phê duyệt</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>2019-02-13 15:30</td>
+                        <td>2019-02-13 17:30</td>
+                        <td>0.25 Ngày</td>
+                        <td>2019-02-14</td>
+                        <td>Chấp thuận</td>
+                        <td>dacnv@vnext.vn</td>
+                        <td>OK</td>
+                        <td>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2019-02-01 08:30</td>
+                        <td>2019-02-01 17:30</td>
+                        <td>1 Ngày</td>
+                        <td>2019-01-25</td>
+                        <td>Chấp thuận</td>
+                        <td>dacnv@vnext.vn</td>
+                        <td>OK</td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--.card-->
+
+</div>
+</body>
+</html>

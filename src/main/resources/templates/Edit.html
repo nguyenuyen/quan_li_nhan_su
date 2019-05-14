@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Core :: head"></head>
+<body data-ma-theme="orange">
+<main class="main">
+
+
+    <header th:replace="Header.html :: header"></header>
+    <aside th:replace="Menu.html :: menu"></aside>
+
+
+    <section class="content">
+
+        <div th:if="${group} == '1' and ${mode} == '1'" >
+            <div th:replace="/Home.html :: home"/>
+        </div>
+
+        <div th:if="${group} == '2' and ${mode} == '1'" >
+            <div th:replace="vacation/MyVacation.html :: MyVacation"/>
+        </div>
+
+        <div th:if="${group} == '2' and ${mode} == '2'" >
+            <div th:replace="vacation/StaffVacation.html :: requiteStaffVacation"/>
+        </div>
+
+        <div th:if="${group} == '3' and ${mode} == '1'" >
+            <div th:replace="ot/MyOt.html :: requiteOt"/>
+        </div>
+
+        <div th:if="${group} == '3' and ${mode} == '2'" >
+            <div th:replace="ot/StaffOt.html :: requiteOtStaff"/>
+        </div>
+
+    </section>
+</main>
+
+</body>
+
+</html>

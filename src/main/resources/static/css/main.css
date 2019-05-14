@@ -1,0 +1,13 @@
+.input-group-addon{
+    border-left: 0;
+    border-top: 0;
+}
+.button_not_border{
+    border: 0;
+    padding-bottom: 0;
+}
+.space_layout{
+    margin-top: 30px!important;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}

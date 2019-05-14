@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="home">
+    <!-- Content page -->
+
+    <div class="toolbar">
+        <div class="toolbar__nav">
+            <a href="/?month=current"
+               class="active">
+                Tháng 2</a>
+
+            <a href="/?month=last"
+            >Tháng 1</a>
+        </div>
+    </div><!--.toolbar-->
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Yêu cầu từ nhân viên cần phê duyệt</h2>
+                    <small class="card-subtitle">
+                        Yêu cầu đang đợi bạn phê duyệt trong khoảng thời gian
+                        2019-02-26 đến 2019-03-25.
+                    </small>
+                </div><!--.card-header-->
+                <div class="card-block">
+
+                    <div class="no-request">
+                        <div class="text-center">
+                            <i class="zmdi zmdi-mood zmdi-hc-fw zmdi-hc-4x"></i>
+                            <p style="margin: 0">Tuyệt! không có yêu cầu nào đợi bạn phê duyệt.</p>
+                        </div>
+                    </div>
+
+                </div><!--.card-block-->
+            </div><!--.card-->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Ngày có timesheet bất thường</h2>
+                    <small class="card-subtitle">Ngày bạn đi muộn, về sớm hoặc quên check vân tay trong khoảng thời gian
+                        2019-02-26 đến 2019-03-09.
+                    </small>
+                    <div class="actions">
+                        <a href="/timesheet?startDate=2019-02-26&amp;endDate=2019-03-09" title="Timesheet In Month"
+                           class="actions__item zmdi zmdi-arrow-right"></a>
+                    </div>
+                </div><!--.card-header-->
+                <div class="card-block">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm mb-0">
+                            <thead>
+                            <tr class="text-uppercase">
+                                <th scope="col">Thứ</th>
+                                <th scope="col">Ngày</th>
+                                <th scope="col">Giờ vào</th>
+                                <th scope="col">Giờ ra</th>
+                                <th scope="col">Đi muộn (VNĐ)</th>
+                                <th scope="col">Về sớm (phút)</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr>
+                                <td>T6</td>
+                                <td>2019-03-08</td>
+                                <td>
+
+                                </td>
+
+                                <td>
+
+                                </td>
+
+                                <td>
+                  <span>
+
+                  </span>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="actions listview__actions">
+                                        <div class="dropdown actions__item">
+                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-03-08">
+                                                    Chỉnh sửa
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="/dayoff?start_date=2019-03-08+08%3A30&amp;end_date=2019-03-08+17%3A30">
+                                                    Xin nghỉ phép
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>T5</td>
+                                <td>2019-03-07</td>
+                                <td>
+
+                                </td>
+
+                                <td>
+
+                                </td>
+
+                                <td>
+                  <span>
+
+                  </span>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="actions listview__actions">
+                                        <div class="dropdown actions__item">
+                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-03-07">
+                                                    Chỉnh sửa
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="/dayoff?start_date=2019-03-07+08%3A30&amp;end_date=2019-03-07+17%3A30">
+                                                    Xin nghỉ phép
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>T3</td>
+                                <td>2019-03-05</td>
+                                <td class="text-warning" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Đi muộn 43 phút">
+                                    09:28
+                                </td>
+
+                                <td>
+                                    17:51
+                                </td>
+
+                                <td>
+                  <span>
+                    40000
+                  </span>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="actions listview__actions">
+                                        <div class="dropdown actions__item">
+                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-03-05">
+                                                    Chỉnh sửa
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="/dayoff?start_date=2019-03-05+08%3A30&amp;end_date=2019-03-05+17%3A30">
+                                                    Xin nghỉ phép
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>T5</td>
+                                <td>2019-02-28</td>
+                                <td class="text-warning" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Đi muộn 24 phút">
+                                    09:09
+                                </td>
+
+                                <td>
+                                    17:56
+                                </td>
+
+                                <td>
+                  <span>
+                    20000
+                  </span>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="actions listview__actions">
+                                        <div class="dropdown actions__item">
+                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-02-28">
+                                                    Chỉnh sửa
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="/dayoff?start_date=2019-02-28+08%3A30&amp;end_date=2019-02-28+17%3A30">
+                                                    Xin nghỉ phép
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>T3</td>
+                                <td>2019-02-26</td>
+                                <td class="text-warning" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Đi muộn 34 phút">
+                                    09:19
+                                </td>
+
+                                <td>
+                                    17:32
+                                </td>
+
+                                <td>
+                  <span>
+                    40000
+                  </span>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="actions listview__actions">
+                                        <div class="dropdown actions__item">
+                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-02-26">
+                                                    Chỉnh sửa
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="/dayoff?start_date=2019-02-26+08%3A30&amp;end_date=2019-02-26+17%3A30">
+                                                    Xin nghỉ phép
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                            <tfoot>
+                            <tr class="text-uppercase">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Tổng</td>
+                                <td>100000</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!--.table-responsive-->
+
+                    <a href="/timesheet?startDate=2019-02-26&amp;endDate=2019-03-09" class="view-more">
+                        Timesheet In Month
+                    </a>
+                </div><!--.card-block-->
+            </div><!--.card-->
+        </div><!--.col-md-6-->
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Số ngày phép còn lại</h2>
+                    <small class="card-subtitle">
+                        Số ngày phép còn lại của bạn tính đến 2019-03-25.
+                    </small>
+                </div>
+                <div class="card-block">
+                    <div class="widget-visitors__stats">
+                        <div>
+                            <strong>2</strong>
+                            <small>ngày phép năm</small>
+                        </div>
+                        <div>
+                            <strong>-1.25</strong>
+                            <small>ngày phép bù OT</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Ngày xin nghỉ phép</h2>
+                    <small class="card-subtitle"><a href="/dayoff">Yêu cầu nghỉ phép</a> trong khoảng thời gian
+                        2019-02-26 đến 2019-03-25.
+                    </small>
+                    <div class="actions">
+                        <a href="/dayoff?startDate=2019-02-26&amp;endDate=2019-03-25" title="Timesheet In Month"
+                           class="actions__item zmdi zmdi-arrow-right"></a>
+                    </div>
+                </div>
+                <div class="card-block">
+
+                    <div class="no-request">
+                        <div class="text-center">
+                            <i class="zmdi zmdi-mood zmdi-hc-fw zmdi-hc-4x"></i>
+                            <p style="margin: 0">Đậu! chưa thấy ai chăm như bạn.</p>
+                        </div>
+                    </div>
+
+                    <a href="/dayoff?startDate=2019-02-26&amp;endDate=2019-03-25" class="view-more">Request Dayoff In
+                        Month</a>
+                </div><!--.card-block-->
+            </div><!--.card-->
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Ngày nghỉ lễ</h2>
+                    <small class="card-subtitle">Ngày nghỉ lễ vẫn được tính lương còn lại từ ngày 2019-02-26 đến hết
+                        năm.
+                    </small>
+                </div><!--.card-header-->
+                <div class="card-block">
+
+                    <table class="table mb-0">
+                        <thead>
+                        <tr class="text-uppercase">
+                            <th>Ngày</th>
+                            <th>Tên ngày lễ</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr>
+                            <td>2019-05-01</td>
+                            <td>Quốc tế lao động</td>
+                        </tr>
+
+                        <tr>
+                            <td>2019-04-30</td>
+                            <td>Chiến thắng 30/4</td>
+                        </tr>
+
+                        <tr>
+                            <td>2019-04-29</td>
+                            <td>Chiến thắng 30/4</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div><!--.card-block-->
+            </div><!--.card-->
+        </div><!--.col-md-6-->
+    </div>
+
+</div>
+
+</body>
+</html>

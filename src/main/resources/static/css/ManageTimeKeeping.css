@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    font-family: Roboto,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #f3f3f3;
+}
+.main{
+    position: relative;
+    display: block;
+}
+
+
+.background_navbar{
+    background:#f17000;
+    height: 90px;
+}
+
+.logo{
+    color: white;
+    font-size: 1.5rem;
+}

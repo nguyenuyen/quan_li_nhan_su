@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="listRecruitment">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Danh sách yêu cầu tuyển dụng</h2>
+            <small class="card-subtitle"></small>
+        </div>
+        <div class="card-block">
+            <form action="" method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Chọn phòng ban</label>
+
+                        <div class="form-group">
+                            <select name="to_uid" id="to_uid" class="select2 form-control "
+                                    data-placeholder="Chọn phòng ban">
+                                <option selected></option>
+
+                                <option value="">Tất cả</option>
+
+                                <option value="D1">D1</option>
+
+                            </select>
+                            <p class="text-danger to_uid"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Chọn người yêu cầu </label>
+
+                        <div class="form-group">
+                            <select class="select2 form-control " data-placeholder="Nguời yêu cầu">
+                                <option selected></option>
+
+                                <option value="">tất cả</option>
+
+                                <option value="">uyennt@vnext.com.vn</option>
+
+                            </select>
+                            <p class="text-danger to_uid"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Chọn người thời gian </label>
+
+                        <div class="form-group ">
+                            <input type="text" class="form-control date" id="date" name="date" placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-4 text-center">
+                        <button type="submit" class="btn btn-secondary btn--icon-text mb-1 waves-effect">
+                            <i class="zmdi zmdi-filter-list "></i> lọc
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-block">
+            <span>Total number of records: 0</span>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">#</th>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Giờ yêu cầu</th>
+                        <th scope="col">Yêu cầu</th>
+                        <th scope="col">Loại yêu cầu</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+
+                        <th scope="row">1</th>
+                        <td>
+                            2019-02-24 | CN
+                        </td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td>aaaa</td>
+                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
