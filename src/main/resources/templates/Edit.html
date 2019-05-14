@@ -32,6 +32,9 @@
             <div th:replace="ot/StaffOt.html :: requiteOtStaff"/>
         </div>
 
+        <div th:if="${group} == '4' and ${mode} == '1'" >
+            <div th:replace="timesheet/MyTimesheet :: timesheet"/>
+        </div>
     </section>
 </main>
 

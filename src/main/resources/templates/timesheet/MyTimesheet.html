@@ -12,25 +12,21 @@
             <small class="card-subtitle"></small>
         </div>
         <div class="card-block">
-            <form action="" method="get">
+            <form action="/timesheet" method="get">
                 <div class="row">
                     <div class="col-md-4">
                         <label>Từ ngày </label>
-
-                        <div class="form-group ">
-                            <input type="text" class="form-control start_date" id="startDate" name="startDate" placeholder="YYYY-MM-DD">
-                            <i class="form-group__bar"></i>
-                            <p class="text-danger date "></p>
+                        <div class="form-group">
+                            <!--/*@thymesVar id="startDate" type="java"*/-->
+                            <input type="text" class="form-control startDate" id="startDate" name="startDate" >
                         </div>
-
                     </div>
                     <div class="col-md-4">
                         <label>Tới ngày </label>
 
                         <div class="form-group ">
-                            <input type="text" class="form-control end_date" id="endDate" name="startDate" placeholder="YYYY-MM-DD">
-                            <i class="form-group__bar"></i>
-                            <p class="text-danger date "></p>
+                            <!--/*@thymesVar id="endDate" type="java"*/-->
+                            <input type="text" class="form-control endDate" id="endDate" name="endDate" th:value="${endDate}" >
                         </div>
                     </div>
                     <div class="col-md-4 mt-4 text-center">
@@ -50,23 +46,18 @@
                 <table class="table table-hover mb-0">
                     <thead>
                     <tr class="text-uppercase">
-                        <th scope="col">#</th>
                         <th scope="col">Ngày</th>
                         <th scope="col">Giờ vào</th>
                         <th scope="col">Yêu ra</th>
                         <th scope="col">Chức năng</th>
                     </tr>
                     </thead>
-                    <tbody>
-
+                    <!--/*@thymesVar id="timesheet" type="java"*/-->
+                    <tbody th:each="list : ${timesheet}">
                     <tr>
-
-                        <th scope="row">1</th>
-                        <td>
-                            2019-02-24 | CN
-                        </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
+                        <td th:utext="${list['day']}"></td>
+                        <td th:utext="${list['startDay']}"></td>
+                        <td th:utext="${list['endDay']}"></td>
                         <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
                     </tr>
 

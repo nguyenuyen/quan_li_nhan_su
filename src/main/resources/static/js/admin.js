@@ -18,9 +18,24 @@ $(document).ready(function () {
     // });
 
     $(function () {
-        $('.date').datepicker();
+        $('.startDate').datepicker();
+        $('.endDate').datepicker();
         $('.start_date').datetimepicker();
         $('.end_date').datetimepicker();
+    });
+
+    $(function () {
+        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+        var firstDay = new Date(y, m, 1);
+
+        $("#startDate").text("aaa");
+    });
+
+    $(function () {
+        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+        var lastDay = new Date(y, m + 1, 0);
+
+        $("#endDate").attr("value", lastDay);
     });
 
 });
@@ -51,16 +66,6 @@ function daydiff(first, second, startRegistration, endRegistration) {
     return ((second - first) + (endRegistration - startRegistration)) / (1000 * 60 * 60 * 24);
 }
 
-function registration() {
-    var startRegistrationDate = $(".start_date").value;
-    var endRegistrationDate = $(".end_date").value;
-    if(startRegistrationDate != null && endRegistrationDate != null){
-        alert(startRegistrationDate);
-    }
-    // alert(endRegistrationDate);
-    // var result = daydiff(parseDate(startRegistrationDate[1]), parseDate(endRegistrationDate[1]), parseSeconds(startRegistrationDate[0]), parseSeconds(endRegistrationDate[0]));
-    // $(".working_day").text(result);
-}
 
 
 
