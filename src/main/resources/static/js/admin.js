@@ -17,26 +17,49 @@ $(document).ready(function () {
     //     $(this).attr('style', 'color: #f17000');
     // });
 
-    $(function () {
-        $('.startDate').datepicker();
-        $('.endDate').datepicker();
-        $('.start_date').datetimepicker();
-        $('.end_date').datetimepicker();
+    $( ".flatpickr" ).flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true
+
+    });
+
+    $(".flatpickr_act").flatpickr({
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+    });
+
+    $(".date").flatpickr({
+        mode: "multiple",
+        dateFormat: "Y-m-d"
     });
 
     $(function () {
+        var searchStartDate = $("#searchStartDate").val();
         var date = new Date(), y = date.getFullYear(), m = date.getMonth();
         var firstDay = new Date(y, m, 1);
-
-        $("#startDate").text("aaa");
+        if(searchStartDate != ""){
+            $("#startDate").val(searchStartDate);
+        }else {
+            $("#startDate").val(convertDate(firstDay.toLocaleDateString()));
+        }
     });
 
     $(function () {
-        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-        var lastDay = new Date(y, m + 1, 0);
-
-        $("#endDate").attr("value", lastDay);
+        var searchEndDate = $("#searchEndDate").val();
+        var date = new Date();
+        if(searchEndDate != ""){
+            $("#endDate").val(searchEndDate);
+        }else {
+            $("#endDate").val(convertDate(date.toLocaleDateString()));
+        }
     });
+
+    var convertDate = function(usDate) {
+        var dateParts = usDate.split(/(\d{1,2})[\/ -](\d{1,2})[\/ -](\d{4})/);
+        return dateParts[3] + "-" + dateParts[1] + "-" + dateParts[2];
+    }
 
 });
 

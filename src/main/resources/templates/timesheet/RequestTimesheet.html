@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div class="content__inner" th:fragment="RequestTimesheet">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card">
+                <div class="wrap-form">
+                    <div class="card-header">
+                        <h2 class="card-title" align="center">Yêu cầu chỉnh timesheet</h2>
+                    </div>
+
+                    <div class="card-block">
+                        <form id="forget-timesheet-form" method="post" action="/timesheet/forget">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Người phê duyệt <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        <select name="approver" id="approver" class="select2 form-control">
+                                            <option value="">----------</option>
+                                            <!--/*@thymesVar id="listApprover" type="Map"*/-->
+                                            <option th:each="list : ${listApprover}" th:value="${list['key']}"
+                                                    th:utext="${list['value']}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Ngày :</label>
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                        <div class="form-group">
+                                            <!--/*@thymesVar id="requestTimesheet" type="java"*/-->
+                                            <input name="date_check" type="text" th:value="${requestTimesheet['day']}"
+                                                   class="form-control date"
+                                                   placeholder="Pick a date"
+                                                   readonly="readonly">
+                                            <i class="form-group__bar"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <br>
+                                    <label>Giờ vào :</label>
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                        <div class="form-group">
+                                            <!--/*@thymesVar id="requestTimesheet" type="java"*/-->
+                                            <input name="checkin" th:value="${requestTimesheet['check_in']}" type="text"
+                                                   class="form-control flatpickr">
+
+                                        </div>
+                                    </div>
+                                    <p class="text-danger"></p>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <br>
+                                    <label>Giờ ra: </label>
+
+                                    <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="zmdi zmdi-calendar"></i>
+                    </span>
+                                        <div class="form-group">
+                                            <!--/*@thymesVar id="requestTimesheet" type="java"*/-->
+                                            <input name="checkout" th:value="${requestTimesheet['check_out']}" type="text"
+                                                   class="form-control flatpickr">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br>
+                                    <label>Lý do : <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                            <textarea name="reason" class="form-control textarea-autosize"
+                                                      placeholder="Vì sao bạn yêu cầu sửa thời gian checkin, checkout?..."
+                                                      style="overflow: hidden; overflow-wrap: break-word; height: 50px;"></textarea>
+                                        <i class="form-group__bar"></i>
+                                        <p class="text-danger"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mt-6 text-right">
+                                    <button type="submit"
+                                            class="btn btn-primary btn--icon-text mb-1 send-mail waves-effect">
+                                        Gửi yêu cầu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

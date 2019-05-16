@@ -35,6 +35,14 @@
         <div th:if="${group} == '4' and ${mode} == '1'" >
             <div th:replace="timesheet/MyTimesheet :: timesheet"/>
         </div>
+
+        <div th:if="${group} == '4' and ${mode} == '2'" >
+            <div th:replace="timesheet/ChangeMyTimesheet :: changetimesheet"/>
+        </div>
+
+        <div th:if="${group} == '4' and ${mode} == '5'" >
+            <div th:replace="timesheet/RequestTimesheet :: RequestTimesheet"/>
+        </div>
     </section>
 </main>
 

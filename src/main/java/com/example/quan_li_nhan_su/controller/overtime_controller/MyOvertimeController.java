@@ -66,7 +66,7 @@ public class MyOvertimeController {
             vacationDao.updateFeedback(Integer.parseInt(id), 0);
         }
 
-        model.addAttribute("listRequite", vacationDao.getListRequiteVacation("a6@gmail.com", 1));
+        model.addAttribute("listRequite", vacationDao.getListRequiteVacation("uyen@gmail.com", 1));
         return "Edit";
     }
 }

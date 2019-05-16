@@ -7,22 +7,30 @@ public class Timesheet {
     int id;
     int id_user;
     Date day;
-    String startDay;
-    String endDay;
+    String check_in;
+    String check_out;
+    int history;
 
-    public Timesheet(int id, int id_user, Date day, String startDay, String endDay) {
+    public Timesheet(int id, int id_user, Date day, String check_in, String check_out) {
         this.id = id;
         this.id_user = id_user;
         this.day = day;
-        this.startDay = startDay;
-        this.endDay = endDay;
+        this.check_in = check_in;
+        this.check_out = check_out;
     }
 
-    public Timesheet(int id, Date day, String startDay, String endDay) {
+    public Timesheet(int id, Date day, String check_in, String check_out, int history ) {
         this.id = id;
         this.day = day;
-        this.startDay = startDay;
-        this.endDay = endDay;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.history = history;
+    }
+
+    public Timesheet(Date day, String check_in, String check_out) {
+        this.day = day;
+        this.check_in = check_in;
+        this.check_out = check_out;
     }
 
     public int getId() {
@@ -49,19 +57,23 @@ public class Timesheet {
         this.day = day;
     }
 
-    public String getStartDay() {
-        return startDay;
+    public String getCheck_in() {
+        return check_in;
     }
 
-    public void setStartDay(String startDay) {
-        this.startDay = startDay;
+    public void setCheck_in(String check_in) {
+        this.check_in = check_in;
     }
 
-    public String getEndDay() {
-        return endDay;
+    public String getCheck_out() {
+        return check_out;
     }
 
-    public void setEndDay(String endDay) {
-        this.endDay = endDay;
+    public void setCheck_out(String check_out) {
+        this.check_out = check_out;
     }
+
+    public int getHistory() { return history; }
+
+    public void setHistory(int history) { this.history = history; }
 }

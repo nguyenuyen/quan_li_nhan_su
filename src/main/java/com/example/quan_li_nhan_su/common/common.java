@@ -12,11 +12,6 @@ public class common {
         return str[0];
     }
 
-    public String getTime(String s) throws ParseException {
-        String[] str = s.split("\\.");
-        return str[0];
-    }
-
     public String formatDate(String date){
         Date initDate = null;
         String parsedDate = null;
