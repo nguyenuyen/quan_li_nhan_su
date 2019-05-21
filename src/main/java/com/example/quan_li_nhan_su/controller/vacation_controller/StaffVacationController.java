@@ -4,22 +4,15 @@ package com.example.quan_li_nhan_su.controller.vacation_controller;
 import com.example.quan_li_nhan_su.dao.VacationDao;
 import com.example.quan_li_nhan_su.dao.VacationStaffDao;
 import com.example.quan_li_nhan_su.model.Staff;
-import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.List;
 
 
 @Controller

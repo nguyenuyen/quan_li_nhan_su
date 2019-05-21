@@ -10,6 +10,12 @@ public class Timesheet {
     String check_in;
     String check_out;
     int history;
+    String request_checkin;
+    String request_checkout;
+    String reason;
+    String feedback;
+    String mail;
+    String name;
 
     public Timesheet(int id, int id_user, Date day, String check_in, String check_out) {
         this.id = id;
@@ -31,6 +37,35 @@ public class Timesheet {
         this.day = day;
         this.check_in = check_in;
         this.check_out = check_out;
+    }
+
+    public Timesheet(int id, Date day, String request_checkin, String request_checkout, String reason, String feedback, String mail, String name) {
+        this.id = id;
+        this.day = day;
+        this.request_checkin = request_checkin;
+        this.request_checkout = request_checkout;
+        this.reason = reason;
+        this.feedback = feedback;
+        this.mail = mail;
+        this.name = name;
+    }
+
+    public Timesheet(int id, Date day, String request_checkin, String request_checkout, String reason, String feedback) {
+        this.id = id;
+        this.day = day;
+        this.request_checkin = request_checkin;
+        this.request_checkout = request_checkout;
+        this.reason = reason;
+        this.feedback = feedback;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -76,4 +111,44 @@ public class Timesheet {
     public int getHistory() { return history; }
 
     public void setHistory(int history) { this.history = history; }
+
+    public String getRequest_checkin() {
+        return request_checkin;
+    }
+
+    public void setRequest_checkin(String request_checkin) {
+        this.request_checkin = request_checkin;
+    }
+
+    public String getRequest_checkout() {
+        return request_checkout;
+    }
+
+    public void setRequest_checkout(String request_checkout) {
+        this.request_checkout = request_checkout;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }

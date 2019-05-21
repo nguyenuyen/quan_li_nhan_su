@@ -12,21 +12,14 @@
             <small class="card-subtitle"></small>
         </div>
         <div class="card-block">
-            <form action="" method="get">
+            <form action="/request/staff/vacation" method="get">
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group space_layout">
                             <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
-                            <input type="text" class="form-control " id="search" name="search" placeholder="Search for record...">
-                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
-                                <i class="zmdi zmdi-print"></i>
-                            </button>
-                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
-                                <i class="zmdi zmdi-download"></i>
-                            </button>
-                            <i class="form-group__bar"></i>
-                            <p class="text-danger "></p>
+                            <!--/*@thymesVar id="search" type="java"*/-->
+                            <input type="text" class="form-control " id="search" name="search" placeholder="Search for record..." th:value="${search}">
                         </div>
                     </div>
                 </div>
@@ -36,64 +29,56 @@
 
     <div class="card">
         <div class="card-block">
-            <span>Total number of records: 0</span>
+            <span>Total number of records:  <!--/*@thymesVar id="count" type="java"*/-->
+            <span th:utext="${count}"></span></span>
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
                     <thead>
                     <tr class="text-uppercase">
-                        <th scope="col">Người yêu cầu</th>
-                        <th scope="col">họ và tên</th>
-                        <th scope="col">mã vân tay</th>
-                        <th scope="col">mã nhân viên</th>
-                        <th scope="col">bắt đàu</th>
-                        <th scope="col">kết thúc</th>
-                        <th scope="col">thời lượng</th>
+                        <th scope="col">người yêu cầu</th>
+                        <th scope="col">mail</th>
+                        <th scope="col">Ngày bắt đầu</th>
+                        <th scope="col">Ngày kết thúc</th>
+                        <th scope="col">Thời lượng</th>
                         <th scope="col">lí do</th>
-                        <th scope="col">người phê duyệt</th>
-                        <th scope="col">trạng thái</th>
-                        <th scope="col">chức năng</th>
+                        <th scope="col">Yêu cầu lúc</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Người phê duyệt</th>
+                        <th scope="col">hủy</th>
+                        <th scope="col">chấp thuận</th>
                     </tr>
                     </thead>
-                    <tbody>
-
+                    <!--/*@thymesVar id="listRequite" type="java.util.List"*/-->
+                    <tbody th:each="list : ${listRequite}">
                     <tr>
-
-                        <th scope="row">1</th>
+                        <td th:utext="${list['name']}"></td>
+                        <td th:utext="${list['mail']}"></td>
+                        <td th:utext="${list['startDay']}"></td>
+                        <td th:utext="${list['endDay']}"></td>
+                        <td th:utext="${list['numberDate']}"></td>
+                        <td th:utext="${list['reason']}"></td>
+                        <td th:utext="${list['dayRequest']}"></td>
                         <td>
-                            2019-02-24 | CN
+                            <span th:if="${list['feedBack']} == null">cho phe duyet</span>
+                            <span th:if="${list['feedBack']} == 1">chấp thuận</span>
+                            <span th:if="${list['feedBack']} == 0">đã hủy</span>
                         </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+
+                        <td th:utext="${list['mailApprover']}"></td>
+                        <td>
+                                <span th:if="${list['feedBack']} == null"> <a
+                                        th:href="@{/request/staff/vacation(id=${list['id']}, requite = 0)}">cancel</a></span>
+                            <span th:if="${list['feedBack']} != null"></span>
+                        </td>
+
+                        <td>
+                            <span th:if="${list['feedBack']} == null">
+                                <a th:href="@{/request/staff/vacation(id=${list['id']}, requite = 1)}">approve</a></span>
+                            <span th:if="${list['feedBack']} != null"></span>
+                        </td>
+
                     </tr>
 
-                    <tr>
-
-                        <th scope="row">1</th>
-                        <td>
-                            2019-02-24 | CN
-                        </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
-                    </tr>
-
-                    <tr>
-
-                        <th scope="row">1</th>
-                        <td>
-                            2019-02-24 | CN
-                        </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
-                    </tr>
                     </tbody>
                 </table>
             </div>

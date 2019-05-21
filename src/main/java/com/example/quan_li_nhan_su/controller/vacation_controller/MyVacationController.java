@@ -35,13 +35,13 @@ public class MyVacationController {
 
         model.addAttribute("group", '2');
         model.addAttribute("mode", '1');
-        model.addAttribute("listApprover", vacationDao.getApprover("a6@gmail.com"));
+        model.addAttribute("listApprover", vacationDao.getApprover("uyen@gmail.com"));
 
         if ("vacation".equals(act)) {
             try {
                 out = new BufferedOutputStream(res.getOutputStream());
                 JSONObject jsonObject = new JSONObject();
-                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "a6@gmail.com", 0);
+                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "uyen@gmail.com", 0);
                 if (result == 1) {
                     jsonObject.put("result", "OK");
                 } else {
@@ -74,7 +74,7 @@ public class MyVacationController {
             vacationDao.updateFeedback(Integer.parseInt(id), 0);
         }
 
-        model.addAttribute("listRequite", vacationDao.getListRequiteVacation("a6@gmail.com", 0));
+        model.addAttribute("listRequite", vacationDao.getListRequiteVacation("uyen@gmail.com", 0));
 
         return "Edit";
     }

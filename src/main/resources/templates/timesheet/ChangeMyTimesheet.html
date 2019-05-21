@@ -12,7 +12,7 @@
             <small class="card-subtitle"></small>
         </div>
         <div class="card-block">
-            <form action="" method="get">
+            <form action="/timesheet/my/request" method="get">
                 <div class="row">
                     <div class="col-md-4">
                         <label>Từ ngày </label>
@@ -56,21 +56,28 @@
                     <tr class="text-uppercase">
                         <th scope="col">Ngày</th>
                         <th scope="col">Giờ vào</th>
-                        <th scope="col">Yêu ra</th>
-                        <th scope="col">Loại Yêu cầu </th>
+                        <th scope="col">giờ ra</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Chức năng</th>
                     </tr>
                     </thead>
-                    <!--/*@thymesVar id="requestTimesheet" type="java"*/-->
-                    <tbody th:each="list : ${requestTimesheet}">
+                    <!--/*@thymesVar id="timesheet" type="java"*/-->
+                    <tbody th:each="list : ${timesheet}">
                     <tr>
                         <td th:utext="${list['day']}"></td>
-                        <td th:utext="${list['check_in']}"></td>
-                        <td th:utext="${list['check_out']}"></td>
-                        <td><a th:href="@{/timesheet/forget(date_check=${list['day']})}">Chỉnh sửa</a></td>
-                    </tr>
+                        <td th:utext="${list['request_checkin']}"></td>
+                        <td th:utext="${list['request_checkout']}"></td>
+                        <td>
+                            <span th:if="${list['feedback']} == null">cho phe duyet</span>
+                            <span th:if="${list['feedback']} == 1">chấp thuận</span>
+                            <span th:if="${list['feedback']} == 0">đã hủy</span>
+                        </td>
 
+                        <td>
+                            <span th:if="${list['feedback']} == null"> <a th:href="@{/timesheet/my/request(id=${list['id']})}">cancel</a></span>
+                            <span th:if="${list['feedback']} != null"></span>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

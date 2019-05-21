@@ -5,20 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-<div class="content__inner" th:fragment="ChangeTimesheetOfEmployees">
+<div class="content__inner" th:fragment="ChangeStaffTimesheet">
     <div class="card">
         <div class="card-header">
             <h2 class="card-title">Yêu cầu chỉnh timesheet của nhân viên</h2>
             <small class="card-subtitle"></small>
         </div>
         <div class="card-block">
-            <form action="" method="post">
+            <form action="/timesheet/staff" method="get">
                 <div class="row">
                     <div class="col-md-4">
                         <label>Từ ngày </label>
 
                         <div class="form-group ">
-                            <input type="text" class="form-control start_date" id="sdChangeTimesheetE" name="sdChangeTimesheetE" placeholder="mm/dd/yyyy">
+                            <!--/*@thymesVar id="startDate" type="java"*/-->
+                            <input type="hidden" id="searchStartDate" th:value="${startDate}">
+                            <input type="text" class="form-control date"id="startDate" name="startDate" placeholder="mm/dd/yyyy">
                             <i class="form-group__bar"></i>
                             <p class="text-danger date "></p>
                         </div>
@@ -28,7 +30,9 @@
                         <label>Tới ngày </label>
 
                         <div class="form-group ">
-                            <input type="text" class="form-control end_date" id="edChangeTimesheetE" name="edChangeTimesheetE" placeholder="mm/dd/yyyy">
+                            <!--/*@thymesVar id="endDate" type="java"*/-->
+                            <input type="hidden" id="searchEndDate" th:value="${endDate}">
+                            <input type="text" class="form-control date" id="endDate" name="endDate" placeholder="YYYY-MM-DD">
                             <i class="form-group__bar"></i>
                             <p class="text-danger date "></p>
                         </div>
@@ -45,36 +49,53 @@
 
     <div class="card">
         <div class="card-block">
-            <span>Total number of record: 0</span>
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
                     <thead>
                     <tr class="text-uppercase">
-                        <th scope="col">#</th>
+
+                        <th scope="col">Người yêu cầu</th>
+                        <th scope="col">mail</th>
                         <th scope="col">Ngày</th>
                         <th scope="col">Giờ vào</th>
-                        <th scope="col">Yêu ra</th>
-                        <th scope="col">Loại Yêu cầu </th>
+                        <th scope="col">giờ ra</th>
                         <th scope="col">Trạng thái</th>
-                        <th scope="col">Chức năng</th>
+                        <th scope="col">Hủy</th>
+                        <th scope="col">chấp nhận</th>
+
                     </tr>
                     </thead>
-                    <tbody>
 
+                    <!--/*@thymesVar id="timesheet" type="java"*/-->
+                    <tbody th:each="list : ${timesheet}">
                     <tr>
-
-                        <th scope="row">1</th>
+                        <td th:utext="${list['name']}"></td>
+                        <td th:utext="${list['mail']}"></td>
+                        <td th:utext="${list['day']}"></td>
+                        <td th:utext="${list['request_checkin']}"></td>
+                        <td th:utext="${list['request_checkout']}"></td>
                         <td>
-                            2019-02-24 | CN
+                            <span th:if="${list['feedback']} == null">cho phe duyet</span>
+                            <span th:if="${list['feedback']} == 1">chấp thuận</span>
+                            <span th:if="${list['feedback']} == 0">đã hủy</span>
                         </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+
+                        <td>
+                            <span th:if="${list['feedback']} == null"> <a th:href="@{/timesheet/staff(id=${list['id']},  requite = 0)}">cancel</a></span>
+                            <span th:if="${list['feedback']} != null"></span>
+                        </td>
+
+                        <td>
+                            <span th:if="${list['feedback']} == null">
+                                <a th:href="@{/timesheet/staff(id=${list['id']}, date_check= ${list['day']}, checkin= ${list['request_checkin']}, checkout= ${list['request_checkout']}, requite = 1)}">approve</a></span>
+                            <span th:if="${list['feedback']} != null"></span>
+                        </td>
+
                     </tr>
 
                     </tbody>
+
+
                 </table>
             </div>
 

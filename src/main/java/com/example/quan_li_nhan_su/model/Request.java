@@ -13,6 +13,8 @@ public class Request {
     String feedBack;
     Float numberDate;
     String mailApprover;
+    String mail;
+    String name;
 
     public Request(int id, String startDay, String endDay, String reason, String type, String dayRequest, String feedBack, Float numberDate, String mailApprover) {
         this.id = id;
@@ -24,6 +26,35 @@ public class Request {
         this.feedBack = feedBack;
         this.numberDate = numberDate;
         this.mailApprover = mailApprover;
+    }
+    public Request(int id, String startDay, String endDay, String reason, String type, String dayRequest, String feedBack, Float numberDate, String mailApprover, String mail, String name) {
+        this.id = id;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.reason = reason;
+        this.type = type;
+        this.dayRequest = dayRequest;
+        this.feedBack = feedBack;
+        this.numberDate = numberDate;
+        this.mailApprover = mailApprover;
+        this.mail = mail;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public int getId() {

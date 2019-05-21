@@ -40,8 +40,32 @@
             <div th:replace="timesheet/ChangeMyTimesheet :: changetimesheet"/>
         </div>
 
+        <div th:if="${group} == '4' and ${mode} == '3'" >
+            <div th:replace="timesheet/ChangeStaffTimesheet :: ChangeStaffTimesheet"/>
+        </div>
+
         <div th:if="${group} == '4' and ${mode} == '5'" >
             <div th:replace="timesheet/RequestTimesheet :: RequestTimesheet"/>
+        </div>
+
+        <div th:if="${group} == '5' and ${mode} == '1'" >
+            <div th:replace="employees/ListEmployee.html :: ListEmployees"/>
+        </div>
+
+        <div th:if="${group} == '5' and ${mode} == '2'" >
+            <div th:replace="employees/AddEmployee.html :: AddEmployee"/>
+        </div>
+
+        <div th:if="${group} == '5' and ${mode} == '3'" >
+            <div th:replace="employees/EditEmployee.html :: EditEmployee"/>
+        </div>
+
+        <div th:if="${group} == '6' and ${mode} == '1'" >
+            <div th:replace="admin_management/StaffVacation.html :: RequiteLeaveOfAllEmployees"/>
+        </div>
+
+        <div th:if="${group} == '6' and ${mode} == '2'" >
+            <div th:replace="admin_management/StaffOt.html :: requiteOtOfAllEmployees"/>
         </div>
     </section>
 </main>

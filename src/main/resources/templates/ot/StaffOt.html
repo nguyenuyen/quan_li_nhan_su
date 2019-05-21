@@ -37,7 +37,8 @@
                     <table class="table table-hover">
                         <thead>
                         <tr class="text-uppercase">
-                            <th scope="col">id</th>
+                            <th scope="col">người yêu cầu</th>
+                            <th scope="col">mail</th>
                             <th scope="col">Ngày bắt đầu</th>
                             <th scope="col">Ngày kết thúc</th>
                             <th scope="col">Thời lượng</th>
@@ -52,7 +53,8 @@
                         <!--/*@thymesVar id="listRequite" type="java.util.List"*/-->
                         <tbody th:each="list : ${listRequite}">
                         <tr>
-                            <td th:utext="${list['id']}"></td>
+                            <td th:utext="${list['name']}"></td>
+                            <td th:utext="${list['mail']}"></td>
                             <td th:utext="${list['startDay']}"></td>
                             <td th:utext="${list['endDay']}"></td>
                             <td th:utext="${list['numberDate']}"></td>

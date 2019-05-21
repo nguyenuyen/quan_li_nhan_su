@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,21 +12,19 @@
             <small class="card-subtitle"></small>
         </div>
         <div class="card-block">
-            <form action="" method="get">
+            <form action="/staff/filter" method="post">
                 <div class="row">
                     <div class="col-md-3">
                         <label>Chọn phòng ban</label>
                         <div class="form-group">
                             <select name="division" id="division" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
-                                <option selected></option>
 
-                                <option value="d1">D1</option>
+                                <option  value="">tất cả</option>
 
-                                <option value="d2">D2</option>
-
-                                <option value="d3">D3 </option>
-
-                                <option value="bo">BO</option>
+                                <!--/*@thymesVar id="department" type="java"*/-->
+                                <!--/*@thymesVar id="phong_ban" type="java"*/-->
+                                <option th:each="list : ${department}" th:value="${list['id']}"  th:selected="${list['id']} == ${phong_ban}"
+                                        th:utext="${list['name']}"></option>
 
                             </select>
                         </div>
@@ -34,17 +32,13 @@
                     <div class="col-md-3">
                         <label>Loại hợp đồng </label>
                         <div class="form-group ">
-                            <select name="contract" id="contract" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
-                                <option selected></option>
+                            <select name="contract" id="contract" class="select2 form-control">
+                                <option  value="">tất cả</option>
 
-                                <option value="thuc_tap">Thực tập sinh</option>
-
-                                <option value="cong_tac_vien">Cộng tác viên</option>
-
-                                <option value="huebt@vnext.vn">Thử việc </option>
-
-                                <option value="thinhhm@vnext.vn">Chính thức</option>
-
+                                <!--/*@thymesVar id="contract" type="java"*/-->
+                                <!--/*@thymesVar id="hop_dong" type="java"*/-->
+                                <option th:each="list : ${contract}" th:value="${list['id']}"  th:selected="${list['id']} == ${hop_dong}"
+                                        th:utext="${list['name']}"></option>
                             </select>
                             <p class="text-danger"></p>
                         </div>
@@ -52,12 +46,13 @@
                     <div class="col-md-3">
                         <label>Giới tính </label>
                         <div class="form-group ">
-                            <select name="gender" id="gender" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
-                                <option selected></option>
+                            <select name="gender" id="gender" class="select2 form-control">
+                                <option  value="">tất cả</option>
 
-                                <option value="nam">Nam</option>
-
-                                <option value="nu">Nữ</option>
+                                <!--/*@thymesVar id="team" type="java"*/-->
+                                <!--/*@thymesVar id="gioi_tinh" type="java"*/-->
+                                <option th:each="list : ${team}" th:value="${list['id']}"  th:selected="${list['id']} == ${gioi_tinh}"
+                                        th:utext="${list['name']}"></option>
 
                             </select>
                         </div>
@@ -69,29 +64,23 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-group space_layout">
-                            <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
-                            <input type="text" class="form-control " id="search" name="search" placeholder="Search for record...">
-                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
-                                <i class="zmdi zmdi-print"></i>
-                            </button>
-                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
-                                <i class="zmdi zmdi-download"></i>
-                            </button>
-                            <i class="form-group__bar"></i>
-                            <p class="text-danger "></p>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                        <!--<div class="input-group space_layout">-->
+                            <!--<span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>-->
+                            <!--<input type="text" class="form-control " id="search" name="search" placeholder="Search for record...">-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </form>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Total number of records: 0</h2>
+            <span class="card-title">Total number of records: <!--/*@thymesVar id="count" type="java"*/-->
+            <span th:utext="${count}"></span></span>
             <small class="card-subtitle"></small>
         </div>
 
@@ -102,8 +91,8 @@
                     <tr class="text-uppercase">
                         <th scope="col">#</th>
                         <th scope="col">Họ Tên</th>
+                        <th scope="col">Mã vân tay</th>
                         <th scope="col">Mã nhân viên</th>
-                        <th scope="col">Mail</th>
                         <th scope="col">Thư điện tử</th>
                         <th scope="col">Phòng ban</th>
                         <th scope="col">Loại</th>
@@ -111,50 +100,59 @@
                         <th scope="col">Ngày vào công ty</th>
                         <th scope="col">Ngày chính thức</th>
                         <th scope="col">Ngày nghỉ việc</th>
+                        <th scope="col">chức năng</th>
                     </tr>
                     </thead>
-                    <tbody>
-
+                    <!--/*@thymesVar id="listStaff" type="java"*/-->
+                    <tbody th:each="list : ${listStaff}">
                     <tr>
-
-                        <th scope="row">1</th>
+                        <td th:utext="${list['id']}"></td>
+                        <td th:utext="${list['name']}"></td>
+                        <td th:utext="${list['p_id']}"></td>
+                        <td th:utext="${list['code']}"></td>
+                        <td th:utext="${list['mail']}"></td>
                         <td>
-                            2019-02-24 | CN
+                            <span th:if="${list['id_department']} == 1">D1</span>
+                            <span th:if="${list['id_department']} == 2">D2</span>
+                            <span th:if="${list['id_department']} == 3">D3</span>
+                            <span th:if="${list['id_department']} == 4">BO</span>
+
                         </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
-                    </tr>
 
-                    <tr>
-
-                        <th scope="row">1</th>
                         <td>
-                            2019-02-24 | CN
+                            <span th:if="${list['id_contract']} == 1">thực tập</span>
+                            <span th:if="${list['id_contract']} == 2">thử việc</span>
+                            <span th:if="${list['id_contract']} == 3">chính thức</span>
                         </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
-                    </tr>
 
-                    <tr>
-
-                        <th scope="row">1</th>
                         <td>
-                            2019-02-24 | CN
+                            <span th:if="${list['gioi_tinh']} == 1">nam</span>
+                            <span th:if="${list['gioi_tinh']} == 2">nữ</span>
                         </td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td>aaaa</td>
-                        <td><a href="/timesheet/forget?date_check=2019-02-24">Chỉnh sửa</a></td>
+
+                        <td>
+                            <span th:if="${list['day_start']} == null"></span>
+                            <span th:if="${list['day_start']} != null"  th:utext="${list['day_start']}"></span>
+                        </td>
+
+                        <td>
+                            <span th:if="${list['day_main']} == null"></span>
+                            <span th:if="${list['day_main']} != null"  th:utext="${list['day_main']}"></span>
+                        </td>
+
+                        <td>
+                            <span th:if="${list['day_end']} == null"></span>
+                            <span th:if="${list['day_end']} != null"  th:utext="${list['day_end']}"></span>
+                        </td>
+
+                        <td>
+                            <a th:href="@{/staff/edit(code=${list['code']})}">chỉnh sửa</a>
+                        </td>
+
                     </tr>
 
                     </tbody>
+
                 </table>
             </div>
 

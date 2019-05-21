@@ -215,4 +215,31 @@ public class VacationDao extends common {
         }
         return false;
     }
+
+    public boolean updateTimesheet(String checkin, String checkout, String date_check){
+        Connection connection = null;
+        try {
+            String query = "UPDATE timesheet SET checkin = ?::TIME , checkout= ?::TIME WHERE date_check= ?::DATE ";
+            connection = ConnectionDatabase.getConnecttion();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, checkin);
+            ps.setString(2, checkout);
+            ps.setString(3, date_check);
+
+            int rs = ps.executeUpdate();
+            if(rs > 0) {
+                return true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally
+        {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 }
