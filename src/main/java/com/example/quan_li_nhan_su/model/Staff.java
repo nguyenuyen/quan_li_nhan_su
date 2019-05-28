@@ -11,7 +11,6 @@ public class Staff {
     int id_contract;
     String password;
     int p_id; // chung minh thu
-    String feedback;
     int type; // phan quyen
     String birthday;
     String day_start;
@@ -22,7 +21,7 @@ public class Staff {
     String name_contract;
     int gioi_tinh;
 
-    public Staff(int id, String name, String code, String mail, int id_team, int id_department, int id_contract, String password, int p_id, String feedback, int type) {
+    public Staff(int id, String name, String code, String mail, int id_team, int id_department, int id_contract, String password, int p_id, int type) {
         this.id = id;
         this.name = name;
 
@@ -33,7 +32,6 @@ public class Staff {
         this.id_contract = id_contract;
         this.password = password;
         this.p_id = p_id;
-        this.feedback = feedback;
         this.type = type;
     }
 
@@ -188,13 +186,6 @@ public class Staff {
         this.p_id = p_id;
     }
 
-    public String getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
 
     public int getType() {
         return type;

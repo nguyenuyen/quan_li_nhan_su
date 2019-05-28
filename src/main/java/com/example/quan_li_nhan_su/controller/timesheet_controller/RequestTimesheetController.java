@@ -43,8 +43,8 @@ public class RequestTimesheetController {
 
         String startDate = date_check;
         String endDate =  date_check;
-        timesheetDao.updateTimesheet(date_check, check_in,check_out);
-        vacationDao.insertRequestVacation(startDate, endDate, (float) 0, reason, Integer.parseInt(approver), "uyen@gmail.com", 2);
+//        timesheetDao.updateRequestTimesheet(date_check, check_in,check_out);
+        vacationDao.insertRequestVacation(startDate, endDate, (float) 0, reason, Integer.parseInt(approver), "uyen@gmail.com", 2, check_in, check_out);
 
         model.addAttribute("requestTimesheet", timesheetDao.getHistoryTimesheet(Date.valueOf(date_check)));
 

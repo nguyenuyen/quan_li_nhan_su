@@ -99,7 +99,7 @@ public class AddStaffController {
 
         if(name.length ==3){
             model.addAttribute("dem", name[1]);
-            model.addAttribute("dem", name[2]);
+            model.addAttribute("ten", name[2]);
         }
 
         model.addAttribute("mail", staff.getMail());

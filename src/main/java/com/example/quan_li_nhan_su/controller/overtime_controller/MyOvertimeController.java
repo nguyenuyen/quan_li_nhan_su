@@ -31,12 +31,12 @@ public class MyOvertimeController {
 
         model.addAttribute("group", '3');
         model.addAttribute("mode", '1');
-        model.addAttribute("listApprover", vacationDao.getApprover("a6@gmail.com"));
+        model.addAttribute("listApprover", vacationDao.getApprover("uyen@gmail.com"));
         if ("overtime".equals(act)) {
             try {
                 out = new BufferedOutputStream(res.getOutputStream());
                 JSONObject jsonObject = new JSONObject();
-                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "uyen@gmail.com", 1);
+                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "uyen@gmail.com", 1, null, null);
                 if (result == 1) {
                     jsonObject.put("result", "OK");
                 } else {

@@ -54,7 +54,7 @@ public class VacationStaffDao extends VacationDao{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 return new Staff(rs.getInt("id"), rs.getString("name"), rs.getString("code"), rs.getString("mail"), rs.getInt("id_team"),
-                        rs.getInt("id_department"), rs.getInt("id_contract"), rs.getString("password"), rs.getInt("p_id"), rs.getString("feedback"), rs.getInt("type"));
+                        rs.getInt("id_department"), rs.getInt("id_contract"), rs.getString("password"), rs.getInt("p_id"), rs.getInt("type"));
             }
 
         }catch (Exception e) {

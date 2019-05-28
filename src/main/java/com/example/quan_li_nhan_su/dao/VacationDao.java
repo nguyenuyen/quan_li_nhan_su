@@ -6,10 +6,7 @@ import com.example.quan_li_nhan_su.ConnectionDatabase;
 import com.example.quan_li_nhan_su.common.common;
 import com.example.quan_li_nhan_su.model.Request;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,21 +20,76 @@ public class VacationDao extends common {
      * @param endDate
      * @param reason
      */
-    public int insertRequestVacation(String startDate, String endDate, Float number_date, String reason, int approver, String mail, int type){
+    public int insertRequestVacation(String startDate, String endDate, Float number_date, String reason, int approver, String mail, int type, String checkin, String checkout){
         Connection connection = null;
         try {
-            String query = "INSERT INTO request(start_day, end_day, number_date, reason, type, id_approver, id_user) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query =  null;
+            if(checkin != null && checkout != null){
+                query =  "INSERT INTO request(start_day, end_day, number_date, reason, type, id_approver, id_user, request_checkin, request_checkout) VALUES (?, ?, ?, ?, ?, ?, ?, ? :: time , ? :: time )";
+            }else {
+                query =  "INSERT INTO request(start_day, end_day, number_date, reason, type, id_approver, id_user) VALUES (?, ?, ?, ?, ?, ? , ? )";
+            }
+            String query1 = "UPDATE request SET number_date = ?, reason = ?, id_approver = ? where start_day = ?";
+
+            connection = ConnectionDatabase.getConnecttion();
+            PreparedStatement ps = null;
+
+//            if(getStartDay(startDate) > 0 || getFeedback(startDate) > -1 ){
+//                ps = connection.prepareStatement(query1);
+//                ps.setFloat(1, number_date);
+//                ps.setString(2, reason);
+//                ps.setInt(3, approver);
+//                ps.setString(4, startDate);
+//                int result = ps.executeUpdate();
+//                if(result > 0){
+//                    return 1;
+//                }
+//            }else {
+                ps = connection.prepareStatement(query);
+                ps.setString(1, startDate);
+                ps.setString(2, endDate);
+                ps.setFloat(3, number_date);
+                ps.setString(4, reason);
+                ps.setInt(5, type);//0 : nghỉ phép
+                ps.setInt(6, approver);
+                ps.setInt(7, getUserID(mail));
+
+                if(checkin != null && checkout != null){
+                    ps.setString(8, checkin);
+                    ps.setString(9, checkout);
+                }
+
+            int result = ps.executeUpdate();
+                if(result > 0){
+                    return 1;
+                }
+          //  }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally
+        {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public int getStartDay(String startDate){
+        Connection connection = null;
+        int id = -1;
+        try {
+            String query = "SELECT start_day FROM request WHERE start_day = ?";
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, startDate);
-            ps.setString(2, endDate);
-            ps.setFloat(3, number_date);
-            ps.setString(4, reason);
-            ps.setInt(5, type);//0 : nghỉ phép
-            ps.setInt(6, approver);
-            ps.setInt(7, getUserID(mail));
-            int rs = ps.executeUpdate();
-            if(rs > 0){
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
                 return 1;
             }
 
@@ -53,7 +105,42 @@ public class VacationDao extends common {
                 e.printStackTrace();
             }
         }
-        return 0;
+        return id;
+    }
+
+    public int getFeedback(String startDate){
+        Connection connection = null;
+        int id = -2;
+        try {
+            String query = "SELECT feedback FROM request WHERE start_day = ?";
+            connection = ConnectionDatabase.getConnecttion();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, startDate);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                String feedback = rs.getString(1);
+                if(feedback == null) {
+                    return -1;
+                }else if(feedback == "0"){
+                    return 0;
+                }else if(feedback == "1"){
+                    return 1;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally
+        {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
     }
 
     public Map getApprover(String mail){
@@ -142,7 +229,7 @@ public class VacationDao extends common {
         Connection connection = null;
         try {
             List listRequest = new ArrayList();
-            String query = "SELECT * FROM request WHERE id_user = ? AND type = ? ORDER BY feedback DESC";
+            String query = "SELECT * FROM request WHERE id_user = ? AND type = ? ORDER BY day_request DESC";
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, getUserID(mail));

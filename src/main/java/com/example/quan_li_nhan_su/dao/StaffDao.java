@@ -343,7 +343,7 @@ public class StaffDao {
         Connection connection = null;
 
         try {
-            String query = "UPDATE staff SET name = ?, p_id = ?, id_contract = ?, id_department = ?, id_team = ?, day_start = ?, day_main = ?, day_end = ? WHERE code = ?";
+            String query = "UPDATE staff SET name = ?, p_id = ?, id_contract = ?, id_department = ?, id_team = ?, day_start = ?::date , day_main = ?::date , day_end = ?::date WHERE code = ?";
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = connection.prepareStatement(query);
 
@@ -353,8 +353,19 @@ public class StaffDao {
             ps.setInt(4, id_department);
             ps.setInt(5, id_team);
             ps.setString(6, day_start);
-            ps.setString(7, day_main);
-            ps.setString(8, day_end);
+
+            if(day_main != ""){
+                ps.setString(7, day_main);
+            }else {
+                ps.setString(7, null);
+            }
+
+            if(day_end != ""){
+                ps.setString(8, day_end);
+            }else {
+                ps.setString(8, null);
+            }
+
             ps.setString(9, code);
 
             int rs = ps.executeUpdate();

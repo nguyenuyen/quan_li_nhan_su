@@ -9,56 +9,27 @@
 
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Timesheet của nhân viên</h2>
+            <h2 class="card-title">Yêu cầu làm thêm của nhân viên</h2>
         </div>
 
         <div class="card-block">
-            <form action="" method="get">
-
+            <form action="/request/staff/filter" method="post">
                 <div class="row">
-
                     <div class="col-md-3">
-                        <label>Chọn phòng ban </label>
+                        <label>Chọn phòng ban</label>
                         <div class="form-group">
-                            <select name="to_uid" id="uid" class="select2 form-control" data-placeholder="D1">
+                            <select name="division" id="division" class="select2 form-control" data-placeholder="Chọn người duyệt phép">
 
-                                <option value="all">Tất cả</option>
+                                <option  value="">tất cả</option>
 
-                                <option value="d1">D1</option>
-
-                                <option value="d2">D2</option>
-
-                                <option value="d3">D3</option>
-
-                                <option value="bo">BO</option>
-
+                                <!--/*@thymesVar id="department" type="java"*/-->
+                                <!--/*@thymesVar id="phong_ban" type="java"*/-->
+                                <option th:each="list : ${department}" th:value="${list['id']}"  th:selected="${list['id']} == ${phong_ban}"
+                                        th:utext="${list['name']}"></option>
 
                             </select>
-                            <p class="text-danger uid"></p>
                         </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <label>Từ ngày </label>
-                        <div class="form-group ">
-                            <input type="text" class="form-control start_date" id="startDateOt" name="startDateOt"
-                                   placeholder="yyyy-mm-dd">
-                            <i class="form-group__bar"></i>
-                            <p class="text-danger date "></p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label>Tới ngày </label>
-                        <div class="form-group ">
-                            <input type="text" class="form-control end_date" id="endDateOt" name="endDateOt"
-                                   placeholder="yyyy-mm-dd">
-                            <i class="form-group__bar"></i>
-                            <p class="text-danger date "></p>
-                        </div>
-                    </div>
-
-
                     <div class="col-md-3 mt-4 text-center">
                         <button type="submit" class="btn btn-secondary btn--icon-text mb-1 waves-effect">
                             <i class="zmdi zmdi-filter-list "></i> lọc
@@ -74,16 +45,19 @@
         <div class="card-header">
             <h2 class="card-title" id="request-list">Yêu cầu làm thêm của nhân viên</h2>
             <div style="padding-top: 10px;">Yêu cầu làm thêm cần được bạn phê duyệt</div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="input-group space_layout">
-                        <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
-                        <!--/*@thymesVar id="search" type="java"*/-->
-                        <input type="text" class="form-control " id="search" name="search" th:value="${search}"
-                               placeholder="Search for record...">
+            <form action="/request/staff/ot" method="get">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group space_layout">
+                            <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
+                            <!--/*@thymesVar id="search" type="java"*/-->
+                            <input type="text" class="form-control " id="search" name="search" th:value="${search}"
+                                   placeholder="Search for record...">
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            </form>
         </div>
         <div class="card-block">
 

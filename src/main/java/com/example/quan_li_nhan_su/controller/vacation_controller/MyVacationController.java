@@ -41,7 +41,7 @@ public class MyVacationController {
             try {
                 out = new BufferedOutputStream(res.getOutputStream());
                 JSONObject jsonObject = new JSONObject();
-                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "uyen@gmail.com", 0);
+                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "uyen@gmail.com", 0,null, null);
                 if (result == 1) {
                     jsonObject.put("result", "OK");
                 } else {

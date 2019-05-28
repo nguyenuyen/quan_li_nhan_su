@@ -124,17 +124,46 @@ public class TimesheetDao extends common {
         return 0;
     }
 
+    public int updateRequestTimesheet(String date_check, String checkin, String checkout) {
+        Connection connection = null;
+
+        String query = "UPDATE timesheet SET request_checkin = ?::time , request_checkout = ?::time  WHERE   date_check = ?::date ";
+
+        try {
+            connection = ConnectionDatabase.getConnecttion();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, checkin);
+            ps.setString(2, checkout);
+            ps.setString(3, date_check);
+            int rs = ps.executeUpdate();
+            if (rs > 0) {
+                return 1;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+
     public List<Timesheet> getListMyRequestTimesheet(int id_user, String startDate, String endDate) {
         Connection connection = null;
 
         List listTimesheet = new ArrayList();
 
-        String query = ("SELECT r.id, t.date_check, t.request_checkin, t.request_checkout, r.reason, r.feedback, r.id_approver FROM timesheet as t, request r\n" +
+        String query = ("SELECT r.id, t.date_check, r.request_checkin, r.request_checkout, r.reason, r.feedback, r.id_approver FROM timesheet as t, request r\n" +
                 "WHERE t.id_user = ? AND r.type = 2 AND t.history = 1 AND cast (date_check as varchar ) like start_day AND date_check BETWEEN ? AND ? ORDER BY date_check DESC");
 
         try {
             connection = ConnectionDatabase.getConnecttion();
-            PreparedStatement ps = connection.prepareStatement(query.toString());
+            PreparedStatement ps = connection.prepareStatement(query);
 
             ps.setInt(1, id_user);
             ps.setDate(2, Date.valueOf(startDate));
@@ -142,7 +171,7 @@ public class TimesheetDao extends common {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                listTimesheet.add(new Timesheet( rs.getInt("id"), rs.getDate("date_check"), rs.getTime("request_checkin").toString(), rs.getTime("request_checkout").toString(), rs.getString("reason"), rs.getString("feedback")));
+                listTimesheet.add(new Timesheet( rs.getInt("id"), rs.getDate("date_check"), rs.getString("request_checkin"), rs.getString("request_checkout"), rs.getString("reason"), rs.getString("feedback")));
             }
             return listTimesheet;
 
@@ -190,7 +219,7 @@ public class TimesheetDao extends common {
         VacationDao vacationDao = new VacationDao();
         try {
             List listTimesheet = new ArrayList();
-            String query = "SELECT r.id, t.date_check, t.request_checkin, t.request_checkout, r.reason, r.feedback, r.id_approver, s.mail, s.name FROM timesheet as t, request r, staff s WHERE s.type < ? AND s.id_team = ? AND s.id_department = ? AND s.id = r.id_user AND r.type = ?\n" +
+            String query = "SELECT r.id, t.date_check, r.request_checkin, r.request_checkout, r.reason, r.feedback, r.id_approver, s.mail, s.name FROM timesheet as t, request r, staff s WHERE s.type < ? AND s.id_team = ? AND s.id_department = ? AND s.id = r.id_user AND r.type = ?\n" +
                     "AND id_approver = ? AND r.feedback ISNULL AND r.start_day BETWEEN ? AND ? AND t.history = 1 AND cast (date_check as varchar ) like start_day ORDER BY feedback DESC";
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = connection.prepareStatement(query);
@@ -203,7 +232,7 @@ public class TimesheetDao extends common {
             ps.setDate(7, Date.valueOf(end_date));
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                listTimesheet.add(new Timesheet( rs.getInt("id"), rs.getDate("date_check"), rs.getTime("request_checkin").toString(), rs.getTime("request_checkout").toString(), rs.getString("reason"), rs.getString("feedback"), rs.getString("mail"), rs.getString("name")));
+                listTimesheet.add(new Timesheet( rs.getInt("id"), rs.getDate("date_check"), rs.getString("request_checkin"), rs.getString("request_checkout"), rs.getString("reason"), rs.getString("feedback"), rs.getString("mail"), rs.getString("name")));
             }
             return listTimesheet;
 
