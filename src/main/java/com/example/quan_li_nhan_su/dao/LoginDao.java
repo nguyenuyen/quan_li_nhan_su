@@ -11,7 +11,7 @@ public class LoginDao {
     public int login(String mail, String pass) {
         Connection connection = null;
 
-        String query = "SELECT  type FROM staff WHERE mail = ? AND password = ? ";
+        String query = "SELECT type FROM staff WHERE mail = ? AND password = ? ";
 
         try {
             connection = ConnectionDatabase.getConnecttion();

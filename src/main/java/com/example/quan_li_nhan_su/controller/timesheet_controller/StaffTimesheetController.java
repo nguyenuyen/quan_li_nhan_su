@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
@@ -28,11 +30,14 @@ public class StaffTimesheetController {
                             @RequestParam(name = "checkin", required = false) String checkin,
                             @RequestParam(name = "checkout", required = false) String checkout,
                             @RequestParam(name = "date_check", required = false) String date_check,
+                            HttpServletRequest request,
 
                             Model model) {
         LocalDate localDate = LocalDate.now();
         String start_date = localDate.with(TemporalAdjusters.firstDayOfMonth()).toString();
         String end_date = localDate.toString();
+
+        HttpSession session = request.getSession();
 
         model.addAttribute("group", '4');
         model.addAttribute("mode", '3');
@@ -47,7 +52,7 @@ public class StaffTimesheetController {
             timesheetDao.updateTimesheet(date_check, checkin, checkout);
         }
 
-        Staff staff = vacationStaffDao.getInfo("a6@gmail.com");
+        Staff staff = vacationStaffDao.getInfo(session.getAttribute("mail").toString());
 
         if(startDate == null && endDate == null){
             model.addAttribute("timesheet", timesheetDao.getListRequest(staff.getType(), staff.getId_team(), staff.getid_department(), 2, staff.getId(), start_date, end_date));

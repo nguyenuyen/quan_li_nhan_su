@@ -9,10 +9,11 @@
     <div class="nav-scroll">
         <div class="user">
             <div class="user__info" data-toggle="dropdown">
-                <img class="user__img" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50" alt="">
+                <img class="user__img"
+                     src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50"
+                     alt="">
                 <div>
-                    <div class="user__name">uyennt</div>
-                    <div class="user__email">uyennt@vnext.com.vn</div>
+                    <div class="user__email" th:utext="${session.mail}"></div>
                 </div>
             </div>
 
@@ -28,32 +29,22 @@
 
             <li class="navigation__active">
                 <a href="/home&group=1&mode=1">
-                    <i class="zmdi zmdi-home"></i> Bảng điều khiển</a>
+                    <i class="zmdi zmdi-home"></i> Bảng điều khiển
+                </a>
             </li>
 
-            <!--<li class="navigation__sub ">-->
-            <!--<a href="">-->
-            <!--<i class="zmdi zmdi-accounts-list-alt zmdi-hc-fw"></i> Tuyển dụng</a>-->
-
-            <!--<ul>-->
-            <!--<li>-->
-            <!--<a href="/employee">Danh sách tuyển dụng</a>-->
-            <!--</li>-->
-
-
-            <!--</ul>-->
-            <!--</li>-->
 
             <li class="navigation__sub">
-                <a >
+                <a>
                     <i class="zmdi zmdi-calendar-close zmdi-hc-fw"></i> Nghỉ phép
                 </a>
 
-                <ul >
+                <ul>
                     <li>
                         <a href="/vacation">Yêu cầu nghỉ phép của tôi</a>
                     </li>
-                    <li>
+
+                    <li th:if="${session.type == 2 or session.type == 3}">
                         <a href="/vacationStaff">Yêu cầu nghỉ phép của nhân viên</a>
                     </li>
 
@@ -64,11 +55,11 @@
                 <a href="">
                     <i class="zmdi zmdi-time-interval zmdi-hc-fw"></i> Làm thêm giờ</a>
 
-                <ul >
+                <ul>
                     <li>
                         <a href="/overtime">Yêu cầu làm thêm giờ của tôi</a>
                     </li>
-                    <li>
+                    <li th:if="${session.type == 2 or session.type == 3}">
                         <a href="/overtimeStaff">Yêu cầu làm thêm giờ của nhân viên</a>
                     </li>
 
@@ -84,22 +75,22 @@
                         <a href="/timesheet">Timesheet của tôi</a>
                     </li>
 
-                    <li>
+                    <li >
                         <a href="/timesheet/my/request">Yêu cầu chỉnh timesheet của tôi</a>
                     </li>
 
                     <!--<li>-->
-                        <!--<a href="/dayoff">Timesheet của nhân viên</a>-->
+                    <!--<a href="/dayoff">Timesheet của nhân viên</a>-->
                     <!--</li>-->
 
-                    <li>
+                    <li th:if="${session.type == 2 or session.type == 3}">
                         <a href="/timesheet/staff">Yêu cầu chỉnh timesheet của nhân viên</a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class="navigation__sub ">
+            <li class="navigation__sub " th:if="${session.type == 4}">
                 <a href="">
                     <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> Nhân viên</a>
 
@@ -115,7 +106,7 @@
                 </ul>
             </li>
 
-            <li class="navigation__sub ">
+            <li class="navigation__sub " th:if="${session.type == 4}">
                 <a href="">
                     <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i> Quản lí chấm công</a>
 
@@ -129,7 +120,7 @@
                     </li>
 
                     <!--<li>-->
-                        <!--<a href="/timesheet/my/request">Ngày lễ tết</a>-->
+                    <!--<a href="/timesheet/my/request">Ngày lễ tết</a>-->
                     <!--</li>-->
 
                     <li>
@@ -137,7 +128,7 @@
                     </li>
 
                     <!--<li>-->
-                        <!--<a href="/timesheet/my/request">Thống kê ngày phép</a>-->
+                    <!--<a href="/timesheet/my/request">Thống kê ngày phép</a>-->
                     <!--</li>-->
 
                     <li>

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 
 
@@ -25,14 +27,18 @@ public class StaffVacationController {
     public String RequiteStaffVacation(@RequestParam(name = "id", required = false) String id,
                                        @RequestParam(name = "requite", required = false) String requite,
                                        @RequestParam(name = "search", required = false) String search,
-                                       HttpServletResponse response, Model model) throws IOException {
+                                       HttpServletResponse response,
+                                       HttpServletRequest request,
+                                       Model model) throws IOException {
         model.addAttribute("group", '2');
         model.addAttribute("mode", '2');
         model.addAttribute("search", search);
+        HttpSession session = request.getSession();
+
         if (id != null) {
             vacationDao.updateFeedback(Integer.parseInt(id), Integer.parseInt(requite));
         }
-        Staff staff = vacationStaffDao.getInfo("a6@gmail.com");
+        Staff staff = vacationStaffDao.getInfo(session.getAttribute("mail").toString());
         if(search != null){
             model.addAttribute("listRequite", vacationStaffDao.getListRequiteVacationBySearch(search, staff.getType(), staff.getId_team(), staff.getid_department(), 0, staff.getId()));
         }else {

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
@@ -20,12 +22,15 @@ public class MyRequestTimesheetController {
     public String requiteTimesheet(@RequestParam(name = "startDate", required = false) String startDate,
                                    @RequestParam(name = "endDate", required = false) String endDate,
                                    @RequestParam(name = "id", required = false) String id,
+                                   HttpServletRequest request,
 
                                    Model model) {
         model.addAttribute("group", '4');
         model.addAttribute("mode", '2');
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
+
+        HttpSession session = request.getSession();
 
         LocalDate localDate = LocalDate.now();
         String start_date = localDate.with(TemporalAdjusters.firstDayOfMonth()).toString();
@@ -36,9 +41,9 @@ public class MyRequestTimesheetController {
         }
 
         if(startDate == null && endDate == null){
-            model.addAttribute("timesheet", timesheetDao.getListMyRequestTimesheet(vacationDao.getUserID("uyen@gmail.com"),  start_date, end_date));
+            model.addAttribute("timesheet", timesheetDao.getListMyRequestTimesheet(vacationDao.getUserID(session.getAttribute("mail").toString()),  start_date, end_date));
         }else {
-            model.addAttribute("timesheet", timesheetDao.getListMyRequestTimesheet(vacationDao.getUserID("uyen@gmail.com"), startDate, endDate));
+            model.addAttribute("timesheet", timesheetDao.getListMyRequestTimesheet(vacationDao.getUserID(session.getAttribute("mail").toString()), startDate, endDate));
         }
         return "Edit";
     }

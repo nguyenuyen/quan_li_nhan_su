@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,17 +28,20 @@ public class MyOvertimeController {
                                   @RequestParam(name = "act", required = false) String act,
                                   @RequestParam(name = "id", required = false) String id,
                                   HttpServletResponse res,
+                                  HttpServletRequest request,
                                   Model model) {
         BufferedOutputStream out = null;
 
+        HttpSession session = request.getSession();
+
         model.addAttribute("group", '3');
         model.addAttribute("mode", '1');
-        model.addAttribute("listApprover", vacationDao.getApprover("uyen@gmail.com"));
+        model.addAttribute("listApprover", vacationDao.getApprover(session.getAttribute("mail").toString()));
         if ("overtime".equals(act)) {
             try {
                 out = new BufferedOutputStream(res.getOutputStream());
                 JSONObject jsonObject = new JSONObject();
-                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), "uyen@gmail.com", 1, null, null);
+                int result = vacationDao.insertRequestVacation(startDate, endtDate, workingDate, reason, Integer.parseInt(approver), session.getAttribute("mail").toString(), 1, null, null);
                 if (result == 1) {
                     jsonObject.put("result", "OK");
                 } else {
@@ -66,7 +71,7 @@ public class MyOvertimeController {
             vacationDao.updateFeedback(Integer.parseInt(id), 0);
         }
 
-        model.addAttribute("listRequite", vacationDao.getListRequiteVacation("uyen@gmail.com", 1));
+        model.addAttribute("listRequite", vacationDao.getListRequiteVacation(session.getAttribute("mail").toString(), 1));
         return "Edit";
     }
 }

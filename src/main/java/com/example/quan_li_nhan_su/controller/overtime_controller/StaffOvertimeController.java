@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -22,14 +24,17 @@ public class StaffOvertimeController {
     public String RequiteOvertimeStaff(@RequestParam(name = "id", required = false) String id,
                                        @RequestParam(name = "requite", required = false) String requite,
                                        @RequestParam(name = "search", required = false) String search,
+                                       HttpServletRequest request,
                                        Model model) throws IOException {
+        HttpSession session = request.getSession();
+
         model.addAttribute("group", '3');
         model.addAttribute("mode", '2');
         model.addAttribute("search", search);
         if (id != null) {
             vacationDao.updateFeedback(Integer.parseInt(id), Integer.parseInt(requite));
         }
-        Staff staff = vacationStaffDao.getInfo("a6@gmail.com");
+        Staff staff = vacationStaffDao.getInfo(session.getAttribute("mail").toString());
         if(search != null){
             model.addAttribute("listRequite", vacationStaffDao.getListRequiteVacationBySearch(search, staff.getType(), staff.getId_team(), staff.getid_department(), 1, staff.getId()));
         }else {

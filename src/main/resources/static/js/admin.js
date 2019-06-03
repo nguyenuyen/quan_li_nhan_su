@@ -85,9 +85,7 @@ function parseSeconds(str) {
     return (seconds[0] * 1000 * 60 * 60 + seconds[1] * 1000 * 60);
 }
 
-function daydiff(first, second, startRegistration, endRegistration) {
-    return ((second - first) + (endRegistration - startRegistration)) / (1000 * 60 * 60 * 24);
-}
+
 
 
 

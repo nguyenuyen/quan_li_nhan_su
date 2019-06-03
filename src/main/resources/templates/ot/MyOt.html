@@ -18,8 +18,8 @@
                         <label>Bắt đầu <span class="text-danger">*</span></label>
 
                         <div class="form-group ">
-                            <input type="text" class="form-control flatpickr_act" id="start_date" name="startdate"
-                                   placeholder="YYYY-MM-DD hh:mm">
+                            <input type="text" class="form-control flatpickr_act" id="startDate" name="startDate"
+                                   placeholder="YYYY-MM-DD hh:mm" onchange="getTimeOT();">
 
                         </div>
 
@@ -27,8 +27,8 @@
                     <div class="col-md-6">
                         <label>Kết thúc <span class="text-danger">*</span></label>
                         <div class="form-group ">
-                            <input type="text" class="form-control flatpickr_act" id="end_date" name="enddate"
-                                   placeholder="YYYY-MM-DD hh:mm">
+                            <input type="text" class="form-control flatpickr_act" id="endDate" name="endDate"
+                                   placeholder="YYYY-MM-DD hh:mm" onchange="getTimeOT();">
 
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <label>Thời lượng</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">Ngày công</span>
+                                <span class="input-group-addon">Giờ làm việc</span>
 
                                 <div class="form-group">
                                     <input type="text" class="form-control" data-url="/dayoff/count-duration"
@@ -49,7 +49,7 @@
 
                             </div>
                             <small class="card-subtitle">
-                                1 ngày công tương đương 8h làm việc.
+                                giờ
                             </small>
                         </div>
                     </div>

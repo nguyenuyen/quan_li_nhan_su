@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="style.css">-->
 
     <link rel="stylesheet" type="text/css" th:href="@{login.css}"/>
 
@@ -20,28 +20,21 @@
             <!--</div>-->
             <h2 style="text-align: center;color: oldlace;">Login</h2>
             <div class="d-flex justify-content-center form_container ">
-                <form method="post" action="/login">
+                <form action="/loginform" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder=" email" required>
+                        <input type="text" name="mail" class="form-control input_user" value="" placeholder=" email" required>
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="" class="form-control input_pass" value="" placeholder="password" required>
+                        <input type="password" name="password" class="form-control input_pass" value="" placeholder="password" required>
                     </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                            <label class="custom-control-label" for="customControlInline" style=" color: #dfd1d1 !important;">Remember Password</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" name="button" class="btn login_btn">submit</button>
+                    <div class="input-group mb-3">
+                        <input type="submit" name="button" class="form-control login_btn" value="submit"/>
                     </div>
                 </form>
             </div>

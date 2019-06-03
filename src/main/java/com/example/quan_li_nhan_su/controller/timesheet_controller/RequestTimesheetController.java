@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -36,6 +38,7 @@ public class RequestTimesheetController {
                             @RequestParam(name = "checkout", required = false) String check_out,
                             @RequestParam(name = "approver", required = false) String approver,
                             @RequestParam(name = "reason", required = false) String reason,
+                            HttpServletRequest request,
 
                             Model model) {
         model.addAttribute("group", '4');
@@ -43,12 +46,15 @@ public class RequestTimesheetController {
 
         String startDate = date_check;
         String endDate =  date_check;
+
+        HttpSession session = request.getSession();
+
 //        timesheetDao.updateRequestTimesheet(date_check, check_in,check_out);
-        vacationDao.insertRequestVacation(startDate, endDate, (float) 0, reason, Integer.parseInt(approver), "uyen@gmail.com", 2, check_in, check_out);
+        vacationDao.insertRequestVacation(startDate, endDate, (float) 0, reason, Integer.parseInt(approver), session.getAttribute("mail").toString(), 2, check_in, check_out);
 
         model.addAttribute("requestTimesheet", timesheetDao.getHistoryTimesheet(Date.valueOf(date_check)));
 
-        model.addAttribute("listApprover", vacationDao.getApprover("uyen@gmail.com"));
+        model.addAttribute("listApprover", vacationDao.getApprover(session.getAttribute("mail").toString()));
 
         LocalDate localDate = LocalDate.now();
         String start_date = localDate.with(TemporalAdjusters.firstDayOfMonth()).toString();
@@ -56,7 +62,7 @@ public class RequestTimesheetController {
 
         model.addAttribute("startDate", start_date);
         model.addAttribute("endDate", localDate);
-        model.addAttribute("timesheet", timesheetDao.getListMyRequestTimesheet(vacationDao.getUserID("uyen@gmail.com"),  start_date, localDate.toString()));
+        model.addAttribute("timesheet", timesheetDao.getListMyRequestTimesheet(vacationDao.getUserID(session.getAttribute("mail").toString()),  start_date, localDate.toString()));
 
         return "Edit";
     }

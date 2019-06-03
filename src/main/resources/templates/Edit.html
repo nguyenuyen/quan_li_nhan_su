@@ -10,7 +10,7 @@
     <aside th:replace="Menu.html :: menu"></aside>
 
 
-    <section class="content">
+    <section class="content" th:if="${session.type != 0}">
 
         <div th:if="${group} == '1' and ${mode} == '1'" >
             <div th:replace="/Home.html :: home"/>
