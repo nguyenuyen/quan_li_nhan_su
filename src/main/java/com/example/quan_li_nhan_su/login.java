@@ -17,23 +17,25 @@ public class login {
     LoginDao loginDao = new LoginDao();
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @RequestMapping(value = "/loginform", method = RequestMethod.POST)
     public String login(@RequestParam(name = "mail", required = false) String mail,
                         @RequestParam(name = "password", required = false) String pass,
-                        HttpServletRequest request){
+                        HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(mail != null && pass != null){
+        if (mail != null && pass != null) {
             session.setAttribute("mail", mail);
             session.setAttribute("type", loginDao.login(mail, pass));
-            return "redirect:/home&group=1&mode=1";
-        }else {
+            if (loginDao.login(mail, pass) > 0) {
+                return "redirect:/home&group=1&mode=1";
+            }
+        } else {
             return "redirect:/login";
         }
 
-
+        return "login";
     }
 }

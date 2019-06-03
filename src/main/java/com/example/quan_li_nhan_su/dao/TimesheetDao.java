@@ -43,6 +43,41 @@ public class TimesheetDao extends common {
         return null;
     }
 
+    public List<Timesheet> getListTimesheetAdmin(String searchEmployee, String startDate, String endDate) {
+        Connection connection = null;
+        StringBuffer query = new StringBuffer();
+        List listTimesheet = new ArrayList();
+
+        if(searchEmployee == null){
+            searchEmployee = "";
+        }
+
+        query.append("SELECT  s.name, s.mail, s.id_department, t.date_check, t.checkin, t.checkout FROM staff s, timesheet t WHERE s.id = t.id_user AND (s.name like '%" + searchEmployee + "%') AND date_check BETWEEN ? AND ? ORDER BY date_check DESC");
+
+        try {
+            connection = ConnectionDatabase.getConnecttion();
+            PreparedStatement ps = connection.prepareStatement(query.toString());
+            ps.setDate(1, Date.valueOf(startDate));
+            ps.setDate(2, Date.valueOf(endDate));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listTimesheet.add(new Timesheet(rs.getDate("date_check"), rs.getTime("checkin").toString(), rs.getTime("checkout").toString(), rs.getString("mail"), rs.getString("name"), rs.getInt("id_department")));
+            }
+            return listTimesheet;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
     public Timesheet getRequiteTimesheet(Date date) {
         Connection connection = null;
 

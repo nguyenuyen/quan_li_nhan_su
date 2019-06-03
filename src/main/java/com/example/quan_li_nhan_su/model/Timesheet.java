@@ -16,6 +16,16 @@ public class Timesheet {
     String feedback;
     String mail;
     String name;
+    int id_department;
+
+    public Timesheet(Date day, String check_in, String check_out, String mail, String name, int id_department) {
+        this.day = day;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.mail = mail;
+        this.name = name;
+        this.id_department = id_department;
+    }
 
     public Timesheet(int id, int id_user, Date day, String check_in, String check_out) {
         this.id = id;
@@ -58,6 +68,14 @@ public class Timesheet {
         this.reason = reason;
         this.feedback = feedback;
 
+    }
+
+    public int getId_department() {
+        return id_department;
+    }
+
+    public void setId_department(int id_department) {
+        this.id_department = id_department;
     }
 
     public String getName() {

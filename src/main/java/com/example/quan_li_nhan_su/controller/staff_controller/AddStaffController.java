@@ -163,8 +163,8 @@ public class AddStaffController {
         model.addAttribute("team", staffDao.getListTeam());
         model.addAttribute("department", staffDao.getListDepartment());
         model.addAttribute("contract", staffDao.getListContract());
-        model.addAttribute("count", staffDao.countRecord(division, contract, gender));
-        model.addAttribute("listStaff", staffDao.getListStaffByFilter(division, contract, gender));
+        model.addAttribute("count", staffDao.countRecord(contract, division, gender));
+        model.addAttribute("listStaff", staffDao.getListStaffByFilter(contract, division, gender));
         return "Edit";
     }
 }

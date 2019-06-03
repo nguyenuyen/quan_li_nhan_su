@@ -1,6 +1,5 @@
-package com.example.quan_li_nhan_su.controller.timesheet_controller;
+package com.example.quan_li_nhan_su.controller.admin_controller;
 
-import com.example.quan_li_nhan_su.common.common;
 import com.example.quan_li_nhan_su.dao.TimesheetDao;
 import com.example.quan_li_nhan_su.dao.VacationDao;
 import org.springframework.stereotype.Controller;
@@ -15,14 +14,14 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
 @Controller
-class TimesheetController extends common {
-
+public class Timesheet {
     TimesheetDao timesheetDao = new TimesheetDao();
     VacationDao vacationDao = new VacationDao();
 
-    @RequestMapping(value = "/timesheet", method = RequestMethod.GET)
+    @RequestMapping(value = "/timesheet/admin", method = RequestMethod.GET)
     public String Timesheet(@RequestParam(name = "startDate", required = false) String startDate,
                             @RequestParam(name = "endDate", required = false) String endDate,
+                            @RequestParam(name = "search_employee", required = false) String searchEmployee,
                             HttpServletRequest request,
                             Model model) {
         LocalDate localDate = LocalDate.now();
@@ -30,18 +29,23 @@ class TimesheetController extends common {
         String end_date = localDate.toString();
         HttpSession session = request.getSession();
 
-        model.addAttribute("group", '4');
-        model.addAttribute("mode", '1');
+        model.addAttribute("group", '6');
+        model.addAttribute("mode", '3');
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
-        if(startDate == null && endDate == null){
-            model.addAttribute("timesheet", timesheetDao.getListTimesheet(vacationDao.getUserID(session.getAttribute("mail").toString()),  start_date, end_date));
+
+        if(searchEmployee != null){
+            model.addAttribute("search_employee", searchEmployee);
         }else {
-            model.addAttribute("timesheet", timesheetDao.getListTimesheet(vacationDao.getUserID(session.getAttribute("mail").toString()), startDate, endDate));
+            model.addAttribute("search_employee", "");
         }
-
-
+        if (startDate == null && endDate == null) {
+            model.addAttribute("timesheet", timesheetDao.getListTimesheetAdmin(searchEmployee, start_date, end_date));
+        } else {
+            model.addAttribute("timesheet", timesheetDao.getListTimesheetAdmin(searchEmployee, startDate, endDate));
+        }
 
         return "Edit";
     }
+
 }

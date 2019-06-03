@@ -38,7 +38,7 @@
                             <th scope="col">lí do</th>
                             <th scope="col">Yêu cầu lúc</th>
                             <th scope="col">Trạng thái</th>
-                            <th scope="col">Người phê duyệt</th>
+                            <!--<th scope="col">Người phê duyệt</th>-->
                             <th scope="col">hủy</th>
                             <th scope="col">chấp thuận</th>
                         </tr>
@@ -59,7 +59,7 @@
                                 <span th:if="${list['feedBack']} == 0">đã hủy</span>
                             </td>
 
-                            <td th:utext="${list['mailApprover']}"></td>
+                            <!--<td th:utext="${list['mailApprover']}"></td>-->
                             <td>
                                 <span th:if="${list['feedBack']} == null"> <a
                                         th:href="@{/vacationStaff(id=${list['id']}, requite = 0)}">cancel</a></span>

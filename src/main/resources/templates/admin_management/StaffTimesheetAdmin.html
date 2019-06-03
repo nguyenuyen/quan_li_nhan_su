@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content__inner" th:fragment="timesheetOfAllEmployeesAdmin">
+    <div class="card" style="margin-bottom: 0!important;">
+        <div class="card-header">
+            <h2 class="card-title">Timesheet của nhân viên</h2>
+            <small class="card-subtitle"></small>
+        </div>
+        <div class="card-block">
+            <form action="/timesheet/admin" method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Tìm kiếm nhân viên</label>
+                        <div class="form-group input-group ">
+                            <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
+                            <!--/*@thymesVar id="startDate" type="java"*/-->
+                            <input type="text" class="form-control " id="search_employee" name="search_employee" placeholder="Search nhân viên.." th:value="${search_employee}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Từ ngày </label>
+                        <div class="form-group ">
+                            <!--/*@thymesVar id="startDate" type="java"*/-->
+                            <input type="hidden" id="searchStartDate" th:value="${startDate}">
+                            <input type="text" class="form-control date" id="startDate" name="startDate" placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tới ngày  </label>
+
+                        <div class="form-group ">
+                            <!--/*@thymesVar id="endDate" type="java"*/-->
+                            <input type="hidden" id="searchEndDate" th:value="${endDate}">
+
+                            <input type="text" class="form-control date" id="endDate" name="endDate" placeholder="yyyy-mm-dd">
+                            <i class="form-group__bar"></i>
+                            <p class="text-danger date "></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-4 text-center">
+                        <button type="submit" class="btn btn-secondary btn--icon-text mb-1 waves-effect">
+                            <i class="zmdi zmdi-filter-list "></i> lọc
+                        </button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-block">
+            <span>Total number of records: 0</span>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr class="text-uppercase">
+                        <th scope="col">Phòng ban</th>
+                        <th scope="col">email</th>
+                        <th scope="col">họ và tên</th>
+                        <th scope="col">ngày</th>
+                        <th scope="col">giờ vào</th>
+                        <th scope="col">giờ ra</th>
+                    </tr>
+                    </thead>
+                    <!--/*@thymesVar id="timesheet" type="java"*/-->
+                    <tbody th:each="list : ${timesheet}">
+                    <tr>
+                        <td>
+                            <span th:if="${list['id_department']} == 1">D1</span>
+                            <span th:if="${list['id_department']} == 2">D2</span>
+                            <span th:if="${list['id_department']} == 3">D3</span>
+                            <span th:if="${list['id_department']} == 4">BO</span>
+                        </td>
+                        <td th:utext="${list['mail']}"></td>
+                        <td th:utext="${list['name']}"></td>
+                        <td th:utext="${list['day']}"></td>
+                        <td th:utext="${list['check_in']}"></td>
+                        <td th:utext="${list['check_out']}"></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
