@@ -71,6 +71,10 @@
         <div th:if="${group} == '6' and ${mode} == '3'" >
             <div th:replace="admin_management/StaffTimesheetAdmin.html :: timesheetOfAllEmployeesAdmin"/>
         </div>
+
+        <div th:if="${group} == '6' and ${mode} == '4'" >
+            <div th:replace="admin_management/StatisticVacation.html :: statisticVacation"/>
+        </div>
     </section>
 </main>
 

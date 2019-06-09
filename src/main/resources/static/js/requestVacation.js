@@ -6,7 +6,7 @@ function requestVacation(action) {
     var reason = $("#reason").val();
 
     if (startDate == "" || endDate == "" || workingDate == "" || approver == "" || reason == "") {
-        alert("ban can nhap day du cac truong");
+        alert("bạn cần nhập đầy đủ các trường");
         return false;
     }
     var jsonText = jQuery.ajax({
@@ -17,9 +17,9 @@ function requestVacation(action) {
     }).responseText;
     var json = eval("(" + jsonText + ")");
     if (json.result == "OK") {
-        alert("yeu cau thanh cong !");
+        alert("Yêu cầu của bạn thành công !");
     } else {
-        alert("yeu cau that bai ");
+        alert("Yêu cầu thất bại");
     }
 };
 
@@ -73,8 +73,8 @@ function getTime() {
 
 
 function getTimeOT() {
-    var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
+    var startDate = $("#start_date").val();
+    var endDate = $("#end_date").val();
     // var date1 = new Date(startDate);
     // var date2 = new  Date(endDate);
     // if((date1.getTime() > date2.getTime()) && (startDate != null && endDate != null)){

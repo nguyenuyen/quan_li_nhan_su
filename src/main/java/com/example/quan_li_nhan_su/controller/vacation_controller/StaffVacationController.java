@@ -30,11 +30,10 @@ public class StaffVacationController {
                                        HttpServletResponse response,
                                        HttpServletRequest request,
                                        Model model) throws IOException {
+        HttpSession session = request.getSession();
         model.addAttribute("group", '2');
         model.addAttribute("mode", '2');
         model.addAttribute("search", search);
-        HttpSession session = request.getSession();
-
         if (id != null) {
             vacationDao.updateFeedback(Integer.parseInt(id), Integer.parseInt(requite));
         }

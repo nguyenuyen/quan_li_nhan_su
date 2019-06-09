@@ -21,14 +21,14 @@
             <div class="dropdown-menu">
                 <!-- <a class="dropdown-item" href="/profile">Xem Hồ Sơ</a>
                 <a class="dropdown-item" href="">Settings</a> -->
-                <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                <a class="dropdown-item" href="/logoutform">Đăng xuất</a>
             </div>
         </div>
 
         <ul class="navigation">
 
             <li class="navigation__active">
-                <a href="/home&group=1&mode=1">
+                <a href="/home">
                     <i class="zmdi zmdi-home"></i> Bảng điều khiển
                 </a>
             </li>
@@ -44,7 +44,7 @@
                         <a href="/vacation">Yêu cầu nghỉ phép của tôi</a>
                     </li>
 
-                    <li th:if="${session.type == 2 or session.type == 3}">
+                    <li th:if="${session.type == 2 or session.type == 3 or session.type == 4}">
                         <a href="/vacationStaff">Yêu cầu nghỉ phép của nhân viên</a>
                     </li>
 
@@ -59,7 +59,7 @@
                     <li>
                         <a href="/overtime">Yêu cầu làm thêm giờ của tôi</a>
                     </li>
-                    <li th:if="${session.type == 2 or session.type == 3}">
+                    <li th:if="${session.type == 2 or session.type == 3 or session.type == 4}">
                         <a href="/overtimeStaff">Yêu cầu làm thêm giờ của nhân viên</a>
                     </li>
 
@@ -83,7 +83,7 @@
                     <!--<a href="/dayoff">Timesheet của nhân viên</a>-->
                     <!--</li>-->
 
-                    <li th:if="${session.type == 2 or session.type == 3}">
+                    <li th:if="${session.type == 2 or session.type == 3 or session.type == 4}">
                         <a href="/timesheet/staff">Yêu cầu chỉnh timesheet của nhân viên</a>
                     </li>
 
@@ -112,7 +112,7 @@
 
                 <ul>
                     <li>
-                        <a href="/employee">Nhập timesheet từ excel</a>
+                        <!--<a href="/employee">Nhập timesheet từ excel</a>-->
                     </li>
 
                     <li>
@@ -124,7 +124,7 @@
                     <!--</li>-->
 
                     <li>
-                        <a href="/timesheet/my/request">Lịch sử +/- ngày phép</a>
+                        <a href="/history">Lịch sử +/- ngày phép</a>
                     </li>
 
                     <!--<li>-->

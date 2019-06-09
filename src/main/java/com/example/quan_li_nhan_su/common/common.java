@@ -148,4 +148,13 @@ public class common {
         String[] str = s.split(" ");
         return str;
     }
+
+
+    public int dayOfWeek(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfWeek = (int) calendar.get(Calendar.DAY_OF_WEEK);
+
+        return dayOfWeek;
+    }
 }

@@ -75,7 +75,7 @@
                         <td th:utext="${list['request_checkin']}"></td>
                         <td th:utext="${list['request_checkout']}"></td>
                         <td>
-                            <span th:if="${list['feedback']} == null">cho phe duyet</span>
+                            <span th:if="${list['feedback']} == null">chờ phê duyệt</span>
                             <span th:if="${list['feedback']} == 1">chấp thuận</span>
                             <span th:if="${list['feedback']} == 0">đã hủy</span>
                         </td>

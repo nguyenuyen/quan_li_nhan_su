@@ -22,13 +22,18 @@ public class RequestTimesheetController {
 
     @RequestMapping(value = "/timesheet/forget", method = RequestMethod.GET)
     public String Timesheet(@RequestParam(name = "date_check", required = false) String date_check,
+                            HttpServletRequest request,
                             Model model) {
+        HttpSession session = request.getSession();
         model.addAttribute("group", '4');
         model.addAttribute("mode", '5');
+        model.addAttribute("type", session.getAttribute("type"));
+        model.addAttribute("mail", session.getAttribute("mail"));
+        model.addAttribute("id", vacationDao.getUserID(session.getAttribute("mail").toString()));
 
         model.addAttribute("requestTimesheet", timesheetDao.getRequiteTimesheet(Date.valueOf(date_check)));
 
-        model.addAttribute("listApprover", vacationDao.getApprover("uyen@gmail.com"));
+        model.addAttribute("listApprover", vacationDao.getApprover(session.getAttribute("mail").toString()));
 
         return "Edit";
     }
@@ -43,6 +48,7 @@ public class RequestTimesheetController {
                             Model model) {
         model.addAttribute("group", '4');
         model.addAttribute("mode", '2');
+
 
         String startDate = date_check;
         String endDate =  date_check;

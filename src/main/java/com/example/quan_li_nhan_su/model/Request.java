@@ -41,6 +41,14 @@ public class Request {
         this.name = name;
     }
 
+    public Request(int id, String dayRequest, Float numberDate, String mail, String name) {
+        this.id = id;
+        this.dayRequest = dayRequest;
+        this.numberDate = numberDate;
+        this.mail = mail;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

@@ -18,7 +18,7 @@
                         <label>Bắt đầu <span class="text-danger">*</span></label>
 
                         <div class="form-group ">
-                            <input type="text" class="form-control flatpickr_act" id="startDate" name="startDate"
+                            <input type="text" class="form-control flatpickr_act" id="start_date" name="start_date"
                                    placeholder="YYYY-MM-DD hh:mm" onchange="getTimeOT();">
 
                         </div>
@@ -27,7 +27,7 @@
                     <div class="col-md-6">
                         <label>Kết thúc <span class="text-danger">*</span></label>
                         <div class="form-group ">
-                            <input type="text" class="form-control flatpickr_act" id="endDate" name="endDate"
+                            <input type="text" class="form-control flatpickr_act" id="end_date" name="end_date"
                                    placeholder="YYYY-MM-DD hh:mm" onchange="getTimeOT();">
 
                         </div>
@@ -58,6 +58,12 @@
                         <div class="form-group">
                             <select name="approver" id="approver" class="select2 form-control">
                                 <option value="">----------</option>
+
+                                <!--/*@thymesVar id="type" type="java"*/-->
+                                <!--/*@thymesVar id="mail" type="java"*/-->
+                                <!--/*@thymesVar id="id" type="java"*/-->
+                                <option th:if="${type == 4}" th:value="${id}" th:utext="${mail}"></option>
+
                                 <!--/*@thymesVar id="listApprover" type="Map"*/-->
                                 <option th:each="list : ${listApprover}" th:value="${list['key']}"
                                         th:utext="${list['value']}"></option>
@@ -82,7 +88,7 @@
 
                 <div class="row">
                     <div class="col-md-12 mt-4 text-right">
-                        <button type="submit" class="btn btn-primary btn--icon-text mb-1 waves-effect"
+                        <button class="btn btn-primary btn--icon-text mb-1 waves-effect"
                                 id="submitrequest" onclick="requestVacation('overtime');"><i class="zmdi zmdi-mail-send zmdi-hc-fw"></i>Gửi yêu cầu
                         </button>
                     </div>
@@ -124,7 +130,7 @@
                         <td th:utext="${list['reason']}"></td>
                         <td th:utext="${list['dayRequest']}"></td>
                         <td>
-                            <span th:if="${list['feedBack']} == null">cho phe duyet</span>
+                            <span th:if="${list['feedBack']} == null">chờ phê duyệt</span>
                             <span th:if="${list['feedBack']} == 1">chấp thuận</span>
                             <span th:if="${list['feedBack']} == 0">đã hủy</span>
                         </td>

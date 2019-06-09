@@ -64,12 +64,26 @@
                     </thead>
                     <!--/*@thymesVar id="timesheet" type="java"*/-->
                     <tbody th:each="list : ${timesheet}">
-                    <tr>
-                        <td th:utext="${list['day']}"></td>
-                        <td th:utext="${list['check_in']}"></td>
-                        <td th:utext="${list['check_out']}"></td>
-                        <td><a th:href="@{/timesheet/forget(date_check=${list['day']})}">Chỉnh sửa</a></td>
-                    </tr>
+
+                         <span th:if="${list['check_in'] > '08:45:00'} or ${list['check_out'] < '17:30:00'}">
+                             <tr class="table-warning">
+                                 <td th:utext="${list['day']}"></td>
+                                 <td th:utext="${list['check_in']}"></td>
+                                 <td th:utext="${list['check_out']}"></td>
+                                 <td><a th:href="@{/timesheet/forget(date_check=${list['day']})}">Chỉnh sửa</a></td>
+                             </tr>
+                         </span>
+
+                         <span th:if="${list['check_in'] <= '08:45:00'} and ${list['check_out'] >= '17:30:00'}">
+                             <tr>
+                                 <td th:utext="${list['day']}"></td>
+                                 <td th:utext="${list['check_in']}"></td>
+                                 <td th:utext="${list['check_out']}"></td>
+                                 <td><a th:href="@{/timesheet/forget(date_check=${list['day']})}">Chỉnh sửa</a></td>
+                             </tr>
+                         </span>
+
+
 
                     </tbody>
                 </table>

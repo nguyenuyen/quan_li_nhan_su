@@ -36,6 +36,10 @@ public class MyOvertimeController {
 
         model.addAttribute("group", '3');
         model.addAttribute("mode", '1');
+        model.addAttribute("type", session.getAttribute("type"));
+        model.addAttribute("mail", session.getAttribute("mail"));
+        model.addAttribute("id", vacationDao.getUserID(session.getAttribute("mail").toString()));
+
         model.addAttribute("listApprover", vacationDao.getApprover(session.getAttribute("mail").toString()));
         if ("overtime".equals(act)) {
             try {

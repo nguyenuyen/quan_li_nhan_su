@@ -17,6 +17,7 @@ public class Timesheet {
     String mail;
     String name;
     int id_department;
+    int weekday;
 
     public Timesheet(Date day, String check_in, String check_out, String mail, String name, int id_department) {
         this.day = day;
@@ -68,6 +69,23 @@ public class Timesheet {
         this.reason = reason;
         this.feedback = feedback;
 
+    }
+
+    public Timesheet(int id, Date day, String check_in, String check_out, int history, int weekday) {
+        this.id = id;
+        this.day = day;
+        this.check_in = check_in;
+        this.check_out = check_out;
+        this.history = history;
+        this.weekday = weekday;
+    }
+
+    public int getWeekday() {
+        return weekday;
+    }
+
+    public void setWeekday(int weekday) {
+        this.weekday = weekday;
     }
 
     public int getId_department() {

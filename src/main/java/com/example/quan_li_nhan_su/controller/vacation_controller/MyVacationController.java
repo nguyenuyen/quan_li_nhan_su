@@ -40,6 +40,9 @@ public class MyVacationController {
         model.addAttribute("group", '2');
         model.addAttribute("mode", '1');
         model.addAttribute("listApprover", vacationDao.getApprover(session.getAttribute("mail").toString()));
+        model.addAttribute("type", session.getAttribute("type"));
+        model.addAttribute("mail", session.getAttribute("mail"));
+        model.addAttribute("id", vacationDao.getUserID(session.getAttribute("mail").toString()));
 
         if ("vacation".equals(act)) {
             try {

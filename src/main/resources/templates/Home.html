@@ -8,12 +8,11 @@
 
     <div class="toolbar">
         <div class="toolbar__nav">
-            <a href="/?month=current"
+            <a href="#"
                class="active">
-                Tháng 2</a>
+                Tháng 6</a>
 
-            <a href="/?month=last"
-            >Tháng 1</a>
+
         </div>
     </div><!--.toolbar-->
 
@@ -25,17 +24,73 @@
                     <h2 class="card-title">Yêu cầu từ nhân viên cần phê duyệt</h2>
                     <small class="card-subtitle">
                         Yêu cầu đang đợi bạn phê duyệt trong khoảng thời gian
-                        2019-02-26 đến 2019-03-25.
+                        <!--/*@thymesVar id="startDate" type="java"*/-->
+                        <span th:utext="${startDate}"/> đến <!--/*@thymesVar id="endDate" type="java"*/-->
+                        <span th:utext="${endDate}"/>.
                     </small>
                 </div><!--.card-header-->
                 <div class="card-block">
 
-                    <div class="no-request">
-                        <div class="text-center">
-                            <i class="zmdi zmdi-mood zmdi-hc-fw zmdi-hc-4x"></i>
-                            <p style="margin: 0">Tuyệt! không có yêu cầu nào đợi bạn phê duyệt.</p>
+                    <!--/*@thymesVar id="listRequite" type="java"*/-->
+                    <div th:if="${listRequite == null}">
+                        <div class="no-request">
+                            <div class="text-center">
+                                <i class="zmdi zmdi-mood zmdi-hc-fw zmdi-hc-4x"></i>
+                                <p style="margin: 0">Tuyệt! không có yêu cầu nào đợi bạn phê duyệt.</p>
+                            </div>
                         </div>
                     </div>
+
+                    <div th:if="${listRequite != null}">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th scope="col">người yêu cầu</th>
+                                    <th scope="col">mail</th>
+                                    <th scope="col">loại yêu cầu</th>
+                                    <th scope="col">Yêu cầu lúc</th>
+                                    <th scope="col">hủy</th>
+                                    <th scope="col">chấp thuận</th>
+                                </tr>
+                                </thead>
+                                <!--/*@thymesVar id="listRequite" type="java.util.List"*/-->
+                                <tbody th:each="list : ${listRequite}">
+                                <tr>
+                                    <td th:utext="${list['name']}"></td>
+                                    <td th:utext="${list['mail']}"></td>
+
+                                    <td>
+                                        <span th:if="${list['type']} == 0">nghỉ phép</span>
+                                        <span th:if="${list['type']} == 1">làm thêm giờ</span>
+                                        <span th:if="${list['type']} == 2">chỉnh timesheet</span>
+                                    </td>
+
+                                    <td th:utext="${list['dayRequest']}"></td>
+
+
+                                    <!--<td th:utext="${list['mailApprover']}"></td>-->
+
+                                    <td>
+                            <span th:if="${list['feedBack']} == null">
+                                <a th:href="@{/home(id=${list['id']}, requite = 0)}">cancel</a></span>
+                                        <span th:if="${list['feedBack']} != null"></span>
+                                    </td>
+
+                                    <td>
+                            <span th:if="${list['feedBack']} == null">
+                                <a th:href="@{/home(id=${list['id']}, requite = 1)}">approve</a></span>
+                                        <span th:if="${list['feedBack']} != null"></span>
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
 
                 </div><!--.card-block-->
             </div><!--.card-->
@@ -43,10 +98,13 @@
                 <div class="card-header">
                     <h2 class="card-title">Ngày có timesheet bất thường</h2>
                     <small class="card-subtitle">Ngày bạn đi muộn, về sớm hoặc quên check vân tay trong khoảng thời gian
-                        2019-02-26 đến 2019-03-09.
+                        <!--/*@thymesVar id="startDate" type="java"*/-->
+                        <span th:utext="${startDate}"/> đến
+                        <!--/*@thymesVar id="endDate" type="java"*/-->
+                        <span th:utext="${endDate}"/>.
                     </small>
                     <div class="actions">
-                        <a href="/timesheet?startDate=2019-02-26&amp;endDate=2019-03-09" title="Timesheet In Month"
+                        <a href="/timesheet" title="Timesheet In Month"
                            class="actions__item zmdi zmdi-arrow-right"></a>
                     </div>
                 </div><!--.card-header-->
@@ -60,198 +118,42 @@
                                 <th scope="col">Ngày</th>
                                 <th scope="col">Giờ vào</th>
                                 <th scope="col">Giờ ra</th>
-                                <th scope="col">Đi muộn (VNĐ)</th>
-                                <th scope="col">Về sớm (phút)</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
-                            <tbody>
-
+                            <!--/*@thymesVar id="listTimesheetIrregular" type="java"*/-->
+                            <tbody th:each="list : ${listTimesheetIrregular}">
 
                             <tr>
-                                <td>T6</td>
-                                <td>2019-03-08</td>
-                                <td>
+                                <td>T<span th:utext="${list['weekday']}"/></td>
+                                <td th:utext="${list['day']}"></td>
 
-                                </td>
+                                <span th:if="${list['check_in'] > '08:45:00'}">
+                                    <td th:utext="${list['check_in']}" class="text-warning"/>
+                                </span>
 
-                                <td>
+                                <span th:if="${list['check_in'] <= '08:45:00'}">
+                                    <td th:utext="${list['check_in']}"/>
+                                </span>
 
-                                </td>
+                                <span th:if="${list['check_out'] < '17:30:00'}">
+                                    <td th:utext="${list['check_out']}" class="text-warning"/>
+                                </span>
 
-                                <td>
-                  <span>
+                                <span th:if="${list['check_out'] > '17:30:00'}">
+                                    <td th:utext="${list['check_out']}"/>
+                                </span>
 
-                  </span>
-                                </td>
-                                <td>
-
-                                </td>
                                 <td>
                                     <div class="actions listview__actions">
                                         <div class="dropdown actions__item">
                                             <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-03-08">
+                                                <a class="dropdown-item" th:href="@{/timesheet/forget(date_check=${list['day']})}">
                                                     Chỉnh sửa
                                                 </a>
                                                 <a class="dropdown-item"
-                                                   href="/dayoff?start_date=2019-03-08+08%3A30&amp;end_date=2019-03-08+17%3A30">
-                                                    Xin nghỉ phép
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>T5</td>
-                                <td>2019-03-07</td>
-                                <td>
-
-                                </td>
-
-                                <td>
-
-                                </td>
-
-                                <td>
-                  <span>
-
-                  </span>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="actions listview__actions">
-                                        <div class="dropdown actions__item">
-                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-03-07">
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item"
-                                                   href="/dayoff?start_date=2019-03-07+08%3A30&amp;end_date=2019-03-07+17%3A30">
-                                                    Xin nghỉ phép
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>T3</td>
-                                <td>2019-03-05</td>
-                                <td class="text-warning" data-toggle="tooltip" data-placement="top"
-                                    data-original-title="Đi muộn 43 phút">
-                                    09:28
-                                </td>
-
-                                <td>
-                                    17:51
-                                </td>
-
-                                <td>
-                  <span>
-                    40000
-                  </span>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="actions listview__actions">
-                                        <div class="dropdown actions__item">
-                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-03-05">
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item"
-                                                   href="/dayoff?start_date=2019-03-05+08%3A30&amp;end_date=2019-03-05+17%3A30">
-                                                    Xin nghỉ phép
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>T5</td>
-                                <td>2019-02-28</td>
-                                <td class="text-warning" data-toggle="tooltip" data-placement="top"
-                                    data-original-title="Đi muộn 24 phút">
-                                    09:09
-                                </td>
-
-                                <td>
-                                    17:56
-                                </td>
-
-                                <td>
-                  <span>
-                    20000
-                  </span>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="actions listview__actions">
-                                        <div class="dropdown actions__item">
-                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-02-28">
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item"
-                                                   href="/dayoff?start_date=2019-02-28+08%3A30&amp;end_date=2019-02-28+17%3A30">
-                                                    Xin nghỉ phép
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>T3</td>
-                                <td>2019-02-26</td>
-                                <td class="text-warning" data-toggle="tooltip" data-placement="top"
-                                    data-original-title="Đi muộn 34 phút">
-                                    09:19
-                                </td>
-
-                                <td>
-                                    17:32
-                                </td>
-
-                                <td>
-                  <span>
-                    40000
-                  </span>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="actions listview__actions">
-                                        <div class="dropdown actions__item">
-                                            <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="/timesheet/forget?date_check=2019-02-26">
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item"
-                                                   href="/dayoff?start_date=2019-02-26+08%3A30&amp;end_date=2019-02-26+17%3A30">
+                                                   href="/vacation">
                                                     Xin nghỉ phép
                                                 </a>
                                             </div>
@@ -261,21 +163,11 @@
                             </tr>
 
                             </tbody>
-                            <tfoot>
-                            <tr class="text-uppercase">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Tổng</td>
-                                <td>100000</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tfoot>
+
                         </table>
                     </div><!--.table-responsive-->
 
-                    <a href="/timesheet?startDate=2019-02-26&amp;endDate=2019-03-09" class="view-more">
+                    <a href="/timesheet" class="view-more">
                         Timesheet In Month
                     </a>
                 </div><!--.card-block-->
@@ -287,18 +179,28 @@
                 <div class="card-header">
                     <h2 class="card-title">Số ngày phép còn lại</h2>
                     <small class="card-subtitle">
-                        Số ngày phép còn lại của bạn tính đến 2019-03-25.
+                        Số ngày phép còn lại của bạn tính đến <!--/*@thymesVar id="endDate" type="java"*/-->
+                        <span th:utext="${endDate}"/>.
+
                     </small>
                 </div>
                 <div class="card-block">
                     <div class="widget-visitors__stats">
                         <div>
-                            <strong>2</strong>
-                            <small>ngày phép năm</small>
+                            <!--/*@thymesVar id="number_vacation" type="java"*/-->
+                            <strong>
+                                <span th:utext="${number_vacation}"/>
+                            </strong>
+                            <small>phép năm</small>
                         </div>
+
                         <div>
-                            <strong>-1.25</strong>
-                            <small>ngày phép bù OT</small>
+                            <strong>
+                                <!--/*@thymesVar id="permission" type="java"*/-->
+                                <span th:if="${permission < 0}" th:utext="0"/>
+                                <span th:if="${permission > 0}" th:utext="${permission}"/>
+                            </strong>
+                            <small>phép năm còn lại</small>
                         </div>
                     </div>
                 </div>
@@ -307,24 +209,60 @@
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Ngày xin nghỉ phép</h2>
-                    <small class="card-subtitle"><a href="/dayoff">Yêu cầu nghỉ phép</a> trong khoảng thời gian
-                        2019-02-26 đến 2019-03-25.
+                    <small class="card-subtitle"><a href="/vacation">Yêu cầu nghỉ phép</a> trong khoảng thời gian
+                        <!--/*@thymesVar id="startDate" type="java"*/-->
+                        <span th:utext="${startDate}"/> đến <!--/*@thymesVar id="endDate" type="java"*/-->
+                        <span th:utext="${endDate}"/>.
                     </small>
                     <div class="actions">
-                        <a href="/dayoff?startDate=2019-02-26&amp;endDate=2019-03-25" title="Timesheet In Month"
+                        <a href="/vacation" title="Timesheet In Month"
                            class="actions__item zmdi zmdi-arrow-right"></a>
                     </div>
                 </div>
                 <div class="card-block">
 
-                    <div class="no-request">
-                        <div class="text-center">
-                            <i class="zmdi zmdi-mood zmdi-hc-fw zmdi-hc-4x"></i>
-                            <p style="margin: 0">Đậu! chưa thấy ai chăm như bạn.</p>
+                    <!--/*@thymesVar id="listRequiteVacation" type="java"*/-->
+                    <div th:if="${listRequiteVacation == null}">
+                        <div class="no-request">
+                            <div class="text-center">
+                                <i class="zmdi zmdi-mood zmdi-hc-fw zmdi-hc-4x"></i>
+                                <p style="margin: 0">wow! chưa thấy ai chăm như bạn.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <a href="/dayoff?startDate=2019-02-26&amp;endDate=2019-03-25" class="view-more">Request Dayoff In
+
+                    <div th:if="${listRequiteVacation != null}">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th scope="col">id</th>
+                                    <th scope="col">ngày bắt đầu</th>
+                                    <th scope="col">ngày kết thúc</th>
+                                    <th scope="col">số lượng</th>
+                                    <th scope="col">trạng thái</th>
+                                </tr>
+                                </thead>
+                                <!--/*@thymesVar id="listRequite" type="java.util.List"*/-->
+                                <tbody th:each="list : ${listRequiteVacation}">
+                                <tr>
+                                    <td th:utext="${list['id']}"></td>
+                                    <td th:utext="${list['startDay']}"></td>
+                                    <td th:utext="${list['endDay']}"></td>
+                                    <td th:utext="${list['numberDate']}"></td>
+
+                                    <td>
+                                        <a th:href="@{/home(id=${list['id']}, requite = 0)}">cancel</a>
+                                    </td>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <a href="/vacation" class="view-more">Request Dayoff In
                         Month</a>
                 </div><!--.card-block-->
             </div><!--.card-->
@@ -332,7 +270,9 @@
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Ngày nghỉ lễ</h2>
-                    <small class="card-subtitle">Ngày nghỉ lễ vẫn được tính lương còn lại từ ngày 2019-02-26 đến hết
+                    <small class="card-subtitle">Ngày nghỉ lễ vẫn được tính lương còn lại từ ngày
+                        <!--/*@thymesVar id="endDate" type="java"*/-->
+                        <span th:utext="${endDate}"/> đến hết
                         năm.
                     </small>
                 </div><!--.card-header-->
@@ -349,18 +289,9 @@
                         <tbody>
 
                         <tr>
-                            <td>2019-05-01</td>
-                            <td>Quốc tế lao động</td>
-                        </tr>
-
-                        <tr>
-                            <td>2019-04-30</td>
-                            <td>Chiến thắng 30/4</td>
-                        </tr>
-
-                        <tr>
-                            <td>2019-04-29</td>
-                            <td>Chiến thắng 30/4</td>
+                            <td>2019-09-02</td>
+                            <td>Quốc Khánh 2019
+                            </td>
                         </tr>
 
                         </tbody>

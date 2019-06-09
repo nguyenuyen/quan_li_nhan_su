@@ -10,10 +10,11 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class logout {
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String login(HttpServletRequest request){
+    @RequestMapping(value = "/logoutform", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.removeAttribute("mail");
+        session.removeAttribute("type");
         return "login";
     }
 }

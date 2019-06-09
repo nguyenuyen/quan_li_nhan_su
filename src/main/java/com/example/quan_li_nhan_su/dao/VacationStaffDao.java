@@ -15,16 +15,22 @@ import java.util.List;
 public class VacationStaffDao extends VacationDao{
     public List<Request> getListRequiteVacationBySearch(String search, int type, int id_team, int id_department, int type_request, int id){
         Connection connection = null;
+        String query = "SELECT r.*, s.mail, s.name FROM request r, staff s WHERE (r.start_day like '%" + search + "%' OR r.end_day like '%" + search + "%' OR r.reason like '%" + search + "%' OR r.id_approver = (SELECT id FROM staff WHERE mail like '%" + search + "%')) AND s.type < ? AND  s.id = r.id_user AND r.type = ? AND id_approver = ? AND r.feedback ISNULL ORDER BY feedback DESC";
+
+        if(type == 4){
+            query = "SELECT r.*, s.mail, s.name FROM request r, staff s WHERE (r.start_day like '%" + search + "%' OR r.end_day like '%" + search + "%' OR r.reason like '%" + search + "%' OR r.id_approver = (SELECT id FROM staff WHERE mail like '%" + search + "%')) AND s.type <= ? AND  s.id = r.id_user AND r.type = ? AND id_approver = ? AND r.feedback ISNULL ORDER BY feedback DESC";
+        }
+
         try {
+
             List listRequest = new ArrayList();
-            String query = "SELECT r.*, s.mail, s.name FROM request r, staff s WHERE (r.start_day like '%" + search + "%' OR r.end_day like '%" + search + "%' OR r.reason like '%" + search + "%' OR r.id_approver = (SELECT id FROM staff WHERE mail like '%" + search + "%')) AND s.type < ? AND s.id_team = ? AND s.id_department = ? AND s.id = r.id_user AND r.type = ? AND id_approver = ? AND r.feedback ISNULL ORDER BY feedback DESC";
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, type);
-            ps.setInt(2, id_team);
-            ps.setInt(3, id_department);
-            ps.setInt(4, type_request);
-            ps.setInt(5, id);
+//            ps.setInt(2, id_team);
+//            ps.setInt(2, id_department);
+            ps.setInt(2, type_request);
+            ps.setInt(3, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 listRequest.add(new Request(rs.getInt("id"),rs.getString("start_day"), rs.getString("end_day"), rs.getString("reason"), rs.getString("type"), getCurrentDate(rs.getString("day_request")), rs.getString("feedback"), rs.getFloat("number_date"), getMail(rs.getInt("id_approver")), rs.getString("mail"), rs.getString("name")));

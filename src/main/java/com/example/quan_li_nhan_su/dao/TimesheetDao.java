@@ -27,7 +27,7 @@ public class TimesheetDao extends common {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                listTimesheet.add(new Timesheet(rs.getInt("id"), rs.getDate("date_check"), rs.getTime("checkin").toString(), rs.getTime("checkout").toString(), rs.getInt("history")));
+                listTimesheet.add(new Timesheet(rs.getInt("id"), rs.getDate("date_check"), rs.getTime("checkin") + "", rs.getTime("checkout") + "", rs.getInt("history")));
             }
             return listTimesheet;
 

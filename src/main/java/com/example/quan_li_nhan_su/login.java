@@ -30,7 +30,7 @@ public class login {
             session.setAttribute("mail", mail);
             session.setAttribute("type", loginDao.login(mail, pass));
             if (loginDao.login(mail, pass) > 0) {
-                return "redirect:/home&group=1&mode=1";
+                return "redirect:/home";
             }
         } else {
             return "redirect:/login";

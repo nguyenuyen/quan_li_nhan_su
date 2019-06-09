@@ -29,7 +29,7 @@ public class VacationDao extends common {
             }else {
                 query =  "INSERT INTO request(start_day, end_day, number_date, reason, type, id_approver, id_user) VALUES (?, ?, ?, ?, ?, ? , ? )";
             }
-            String query1 = "UPDATE request SET number_date = ?, reason = ?, id_approver = ? where start_day = ?";
+//            String query1 = "UPDATE request SET number_date = ?, reason = ?, id_approver = ? where start_day = ?";
 
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = null;
@@ -229,7 +229,7 @@ public class VacationDao extends common {
         Connection connection = null;
         try {
             List listRequest = new ArrayList();
-            String query = "SELECT * FROM request WHERE id_user = ? AND type = ? ORDER BY day_request DESC";
+            String query = "SELECT * FROM request WHERE id_user = ? AND type = ? AND feedback ISNULL ORDER BY day_request DESC";
             connection = ConnectionDatabase.getConnecttion();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, getUserID(mail));
@@ -238,7 +238,12 @@ public class VacationDao extends common {
             while (rs.next()){
                 listRequest.add(new Request(rs.getInt("id"),rs.getString("start_day"), rs.getString("end_day"), rs.getString("reason"), rs.getString("type"), getCurrentDate(rs.getString("day_request")), rs.getString("feedback"), rs.getFloat("number_date"), getMail(rs.getInt("id_approver"))));
             }
-            return listRequest;
+
+            if(listRequest.size() > 0){
+                return listRequest;
+            }else {
+                return null;
+            }
 
         }catch (Exception e) {
             e.printStackTrace();

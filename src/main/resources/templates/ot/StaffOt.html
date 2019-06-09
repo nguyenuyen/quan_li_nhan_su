@@ -18,12 +18,6 @@
                             <span class="input-group-addon "><i class="zmdi zmdi-search"></i></span>
                             <!--/*@thymesVar id="search" type="java"*/-->
                             <input type="text" class="form-control " id="search" name="search" placeholder="Search for record..." onkeypress="search()" th:value="${search}">
-                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
-                                <i class="zmdi zmdi-print"></i>
-                            </button>
-                            <button class="btn btn-secondary btn--icon-text mb-1 waves-effect button_not_border">
-                                <i class="zmdi zmdi-download"></i>
-                            </button>
                             <i class="form-group__bar"></i>
                             <p class="text-danger "></p>
                         </div>
@@ -45,7 +39,6 @@
                             <th scope="col">lí do</th>
                             <th scope="col">Yêu cầu lúc</th>
                             <th scope="col">Trạng thái</th>
-                            <th scope="col">Người phê duyệt</th>
                             <th scope="col">hủy</th>
                             <th scope="col">chấp thuận</th>
                         </tr>
@@ -61,12 +54,12 @@
                             <td th:utext="${list['reason']}"></td>
                             <td th:utext="${list['dayRequest']}"></td>
                             <td>
-                                <span th:if="${list['feedBack']} == null">cho phe duyet</span>
+                                <span th:if="${list['feedBack']} == null">chờ phê duyệt</span>
                                 <span th:if="${list['feedBack']} == 1">chấp thuận</span>
                                 <span th:if="${list['feedBack']} == 0">đã hủy</span>
                             </td>
 
-                            <td th:utext="${list['mailApprover']}"></td>
+                            <!--<td th:utext="${list['mailApprover']}"></td>-->
 
                             <td>
                             <span th:if="${list['feedBack']} == null">
